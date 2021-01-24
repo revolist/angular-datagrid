@@ -1,0 +1,43 @@
+{
+  "name": "@revolist/angular-datagrid",
+  "description": "Angular data grid spreadsheet",
+  "version": "1.0.0",
+  "main": "dist/revogrid.js",
+  "scripts": {
+    "build": "tsc",
+    "serve": "webpack serve --content-base public"
+  },
+  "keywords": [
+    "spreadsheet",
+    "angular",
+    "datagrid",
+    "revogrid",
+    "excel",
+    "js",
+    "gridjs",
+    "virtual",
+    "virtual grid",
+    "datalist",
+    "rangeedit",
+    "grouping"
+  ],
+  "author": "revolist",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/revolist/angular-datagrid.git"
+  },
+  "bugs": {
+    "url": "https://github.com/revolist/angular-datagrid/issues"
+  },
+  "homepage": "https://github.com/revolist/angular-datagrid#readme",
+  "license": "MIT",
+  "devDependencies": {
+    "@stencil/store": "^1.3.0",
+    "typescript": "^4.1.3",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.0.1"
+  },
+  "dependencies": {
+    "@revolist/revogrid": "^2.9.0"
+  }
+}
