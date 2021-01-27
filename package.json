@@ -2,9 +2,9 @@
   "name": "@revolist/angular-datagrid",
   "description": "Angular data grid spreadsheet",
   "version": "1.0.0",
-  "main": "dist/revogrid.js",
+  "main": "dist/revogrid.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist && mkdir dist && cp -rp src/* dist",
     "serve": "ng serve"
   },
   "keywords": [

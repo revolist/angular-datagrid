@@ -16,7 +16,7 @@
       "dom"
     ],
     "paths": {
-      "@revolist/angular-datagrid": ["src/revogrid"]
+      "@revolist/angular-datagrid": ["dist/revogrid"]
     }
   }
 }
