@@ -1,0 +1,7 @@
+body, html, app-root, .content {
+    height: 100%;
+}
+
+revo-grid {
+    height: calc(80vh);
+}
