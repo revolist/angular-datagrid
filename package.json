@@ -52,6 +52,6 @@
     "zone.js": "~0.11.3"
   },
   "dependencies": {
-    "@revolist/revogrid": "^2.9.0"
+    "@revolist/revogrid": "^2.9.2"
   }
 }
