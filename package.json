@@ -1,7 +1,7 @@
 {
   "name": "@revolist/angular-datagrid",
   "description": "Angular data grid spreadsheet",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/revogrid.ts",
   "scripts": {
     "build": "rm -rf dist && mkdir dist && cp -rp src/* dist",
@@ -52,6 +52,6 @@
     "zone.js": "~0.11.3"
   },
   "dependencies": {
-    "@revolist/revogrid": "^2.9.2"
+    "@revolist/revogrid": "^2.9.4"
   }
 }
