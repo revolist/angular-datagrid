@@ -16,12 +16,12 @@ export declare interface RevoGrid extends Components.RevoGrid {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   inputs: ['autoSizeColumn', 'canFocus', 'colSize', 'columnTypes', 'columns', 'editors', 'exporting', 'filter', 'frameSize', 'grouping', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'theme', 'trimmedRows'],
-  outputs: ['beforeEdit', 'beforeRangeEdit', 'afterEdit', 'beforeAutofill', 'beforeRange', 'rowOrderChanged', 'beforeSourceSortingApply', 'beforeSortingApply', 'beforeSorting', 'rowDragStart', 'headerClick', 'beforeCellFocus', 'beforeSourceSet', 'afterSourceSet', 'beforeColumnsSet', 'afterColumnsSet', 'beforeFilterApply', 'beforeFilterTrimmed', 'viewportScroll', 'beforeExport', 'beforeEditStart']
+  outputs: ['beforeEdit', 'beforeRangeEdit', 'afterEdit', 'beforeAutofill', 'beforeRange', 'rowOrderChanged', 'beforeSourceSortingApply', 'beforeSortingApply', 'beforeSorting', 'rowDragStart', 'headerClick', 'beforeCellFocus', 'beforeSourceSet', 'afterSourceSet', 'beforeColumnsSet', 'afterColumnsSet', 'beforeFilterApply', 'beforeFilterTrimmed', 'beforeTrimmed', 'afterTrimmed', 'viewportScroll', 'beforeExport', 'beforeEditStart']
 })
 export class RevoGrid {
   /** Before edit event.
 Triggered before edit data applied.
-Use e.preventDefault() to prevent edit data set and use you own. 
+Use e.preventDefault() to prevent edit data set and use you own.
 Use e.val = {your value} to replace edit result with your own. */
   beforeEdit!: IRevoGridComponent['beforeEdit'];
   /** Before range edit event.
@@ -54,7 +54,7 @@ Initial sorting triggered, if this event stops no other event called.
 Use e.preventDefault() to prevent sorting. */
   beforeSorting!: IRevoGridComponent['beforeSorting'];
   /** Row order change started.
-Use e.preventDefault() to prevent row order change. 
+Use e.preventDefault() to prevent row order change.
 Use e.text = 'new name' to change item name on start. */
   rowDragStart!: IRevoGridComponent['rowDragStart'];
   /** On header click. */
@@ -80,6 +80,12 @@ Use e.preventDefault() to prevent value trimming and filter apply
 Update @collection if you wish to change filters
 Update @itemsToFilter if you wish to filter indexes of trimming */
   beforeFilterTrimmed!: IRevoGridComponent['beforeFilterTrimmed'];
+  /** Before trimmed values
+Use e.preventDefault() to prevent value trimming
+Update @trimmed if you wish to filter indexes of trimming */
+  beforeTrimmed!: IRevoGridComponent['beforeTrimmed'];
+  /** Notify trimmed applied */
+  afterTrimmed!: IRevoGridComponent['afterTrimmed'];
   /** Triggered when view port scrolled */
   viewportScroll!: IRevoGridComponent['viewportScroll'];
   /** Before export
@@ -93,7 +99,7 @@ Use e.preventDefault() to prevent edit */
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['beforeEdit', 'beforeRangeEdit', 'afterEdit', 'beforeAutofill', 'beforeRange', 'rowOrderChanged', 'beforeSourceSortingApply', 'beforeSortingApply', 'beforeSorting', 'rowDragStart', 'headerClick', 'beforeCellFocus', 'beforeSourceSet', 'afterSourceSet', 'beforeColumnsSet', 'afterColumnsSet', 'beforeFilterApply', 'beforeFilterTrimmed', 'viewportScroll', 'beforeExport', 'beforeEditStart']);
+    proxyOutputs(this, this.el, ['beforeEdit', 'beforeRangeEdit', 'afterEdit', 'beforeAutofill', 'beforeRange', 'rowOrderChanged', 'beforeSourceSortingApply', 'beforeSortingApply', 'beforeSorting', 'rowDragStart', 'headerClick', 'beforeCellFocus', 'beforeSourceSet', 'afterSourceSet', 'beforeColumnsSet', 'afterColumnsSet', 'beforeFilterApply', 'beforeFilterTrimmed', 'beforeTrimmed', 'afterTrimmed', 'viewportScroll', 'beforeExport', 'beforeEditStart']);
   }
 }
 
