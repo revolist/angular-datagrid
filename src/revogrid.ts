@@ -8,14 +8,14 @@ import { Components } from '@revolist/revogrid';
 import { RevoGridComponent as IRevoGridComponent } from '@revolist/revogrid/dist/types/components/revo-grid/revo-grid';
 export declare interface RevoGrid extends Components.RevoGrid {}
 @ProxyCmp({
-  inputs: ['autoSizeColumn', 'canFocus', 'colSize', 'columnTypes', 'columns', 'editors', 'exporting', 'filter', 'frameSize', 'grouping', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'theme', 'trimmedRows'],
+  inputs: ['autoSizeColumn', 'canFocus', 'colSize', 'columnTypes', 'columns', 'editors', 'exporting', 'filter', 'frameSize', 'grouping', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'theme', 'trimmedRows', 'useClipboard'],
   methods: ['refresh', 'scrollToRow', 'scrollToColumnIndex', 'scrollToColumnProp', 'updateColumns', 'addTrimmed', 'scrollToCoordinate', 'setCellEdit', 'registerVNode', 'getSource', 'getVisibleSource', 'getSourceStore', 'getColumnStore', 'updateColumnSorting', 'getColumns', 'clearFocus', 'getPlugins']
 })
 @Component({
   selector: 'revo-grid',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['autoSizeColumn', 'canFocus', 'colSize', 'columnTypes', 'columns', 'editors', 'exporting', 'filter', 'frameSize', 'grouping', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'theme', 'trimmedRows'],
+  inputs: ['autoSizeColumn', 'canFocus', 'colSize', 'columnTypes', 'columns', 'editors', 'exporting', 'filter', 'frameSize', 'grouping', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'theme', 'trimmedRows', 'useClipboard'],
   outputs: ['beforeEdit', 'beforeRangeEdit', 'afterEdit', 'beforeAutofill', 'beforeRange', 'rowOrderChanged', 'beforeSourceSortingApply', 'beforeSortingApply', 'beforeSorting', 'rowDragStart', 'headerClick', 'beforeCellFocus', 'beforeSourceSet', 'afterSourceSet', 'beforeColumnsSet', 'afterColumnsSet', 'beforeFilterApply', 'beforeFilterTrimmed', 'beforeTrimmed', 'afterTrimmed', 'viewportScroll', 'beforeExport', 'beforeEditStart']
 })
 export class RevoGrid {
@@ -280,13 +280,13 @@ export class RevogrOrderEditor {
 import { OverlaySelection as IOverlaySelection } from '@revolist/revogrid/dist/types/components/overlay/revogr-overlay-selection';
 export declare interface RevogrOverlaySelection extends Components.RevogrOverlaySelection {}
 @ProxyCmp({
-  inputs: ['canDrag', 'colData', 'dataStore', 'dimensionCol', 'dimensionRow', 'editors', 'lastCell', 'range', 'readonly', 'selectionStore']
+  inputs: ['canDrag', 'colData', 'dataStore', 'dimensionCol', 'dimensionRow', 'editors', 'lastCell', 'range', 'readonly', 'selectionStore', 'useClipboard']
 })
 @Component({
   selector: 'revogr-overlay-selection',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['canDrag', 'colData', 'dataStore', 'dimensionCol', 'dimensionRow', 'editors', 'lastCell', 'range', 'readonly', 'selectionStore'],
+  inputs: ['canDrag', 'colData', 'dataStore', 'dimensionCol', 'dimensionRow', 'editors', 'lastCell', 'range', 'readonly', 'selectionStore', 'useClipboard'],
   outputs: ['internalCopy', 'internalPaste', 'internalCellEdit', 'internalFocusCell', 'setEdit', 'setRange', 'setTempRange', 'focusCell', 'unregister', 'internalSelectionChanged', 'internalRangeDataApply']
 })
 export class RevogrOverlaySelection {
@@ -366,14 +366,14 @@ export class RevogrTempRange {
 import { RevogrViewport as IRevogrViewport } from '@revolist/revogrid/dist/types/components/viewport/revogr-viewport';
 export declare interface RevogrViewport extends Components.RevogrViewport {}
 @ProxyCmp({
-  inputs: ['columnFilter', 'columnStores', 'dimensions', 'editors', 'range', 'readonly', 'resize', 'rowClass', 'rowHeaders', 'rowStores', 'uuid', 'viewports'],
+  inputs: ['columnFilter', 'columnStores', 'dimensions', 'editors', 'range', 'readonly', 'resize', 'rowClass', 'rowHeaders', 'rowStores', 'useClipboard', 'uuid', 'viewports'],
   methods: ['scrollToCoordinate', 'clearFocus', 'setEdit']
 })
 @Component({
   selector: 'revogr-viewport',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['columnFilter', 'columnStores', 'dimensions', 'editors', 'range', 'readonly', 'resize', 'rowClass', 'rowHeaders', 'rowStores', 'uuid', 'viewports'],
+  inputs: ['columnFilter', 'columnStores', 'dimensions', 'editors', 'range', 'readonly', 'resize', 'rowClass', 'rowHeaders', 'rowStores', 'useClipboard', 'uuid', 'viewports'],
   outputs: ['setDimensionSize', 'setViewportCoordinate', 'setViewportSize', 'initialRowDragStart', 'beforeEditStart']
 })
 export class RevogrViewport {
