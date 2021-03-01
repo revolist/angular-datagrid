@@ -1,25 +1,37 @@
 {
-  "compilerOptions": {
-    "outDir": "./dist/",
-    "allowSyntheticDefaultImports": true,
-    "declaration": false,
-    "experimentalDecorators": true,
-    "lib": ["dom", "es2017"],
-    "moduleResolution": "node",
-    "module": "esnext",
-    "target": "es2017",
-    "jsx": "react",
-    "jsxFactory": "h",
-    "sourceMap": true,
-    "strictNullChecks": false,
-    "importHelpers": true,
-    "isolatedModules": true
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "strictMetadataEmit": true,
+    "flatModuleOutFile": "core.js",
+    "flatModuleId": "@revolist/angular-datagrid",
+    "skipTemplateCodegen": true,
+    "fullTemplateTypeCheck": false
   },
-  "include": [
-    "src",
-    "*.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false,
+    "declaration": true,
+    "declarationDir": "dist",
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["dom", "es2017"],
+    "module": "es2015",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "outDir": "build/es2015",
+    "pretty": true,
+    "removeComments": false,
+    "importHelpers": true,
+    "rootDir": "src",
+    "strictPropertyInitialization": false,
+    "target": "es2015",
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules"],
+  "files": ["src/index.ts"]
 }
