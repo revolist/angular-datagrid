@@ -77,6 +77,8 @@ Millions of cells and thousands columns easy and efficiently.
 
 ## How to use
 
+Use [Repo](https://github.com/revolist/angular-datagrid-test) as a started if you wish.
+
 With NPM:
 ```bash
 npm i @revolist/angular-datagrid --save;
@@ -95,18 +97,12 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 
 import { AppComponent } from "./app.component";
-// import loader
-import {defineCustomElements} from '@revolist/revogrid/loader';
-// import grid
-import {RevoGrid} from '@revolist/angular-datagrid';
-
-// register grid element
-defineCustomElements();
+import { RevoGridModule } from '@revolist/angular-datagrid';
 
 @NgModule({
   // define component
-  declarations: [AppComponent, RevoGrid],
-  imports: [BrowserModule],
+  declarations: [AppComponent],
+  imports: [BrowserModule, RevoGridModule],
   providers: [],
   bootstrap: [AppComponent]
 })
