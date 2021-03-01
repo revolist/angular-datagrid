@@ -7,8 +7,8 @@ export default {
     format: 'es'
   },
   external: (id) => {
-    // inline @ionic/core deps
-    if (id === '@ionic/core') {
+    // inline @revolist/revogrid deps
+    if (id === '@revolist/revogrid') {
       return false;
     }
     // anything else is external
