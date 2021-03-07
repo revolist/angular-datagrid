@@ -287,7 +287,7 @@ export declare interface RevogrOverlaySelection extends Components.RevogrOverlay
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   inputs: ['canDrag', 'colData', 'dataStore', 'dimensionCol', 'dimensionRow', 'editors', 'lastCell', 'range', 'readonly', 'selectionStore', 'useClipboard'],
-  outputs: ['internalCopy', 'internalPaste', 'internalCellEdit', 'internalFocusCell', 'setEdit', 'setRange', 'setTempRange', 'focusCell', 'unregister', 'internalSelectionChanged', 'internalRangeDataApply']
+  outputs: ['internalCopy', 'internalPaste', 'internalCellEdit', 'internalFocusCell', 'setEdit', 'setRange', 'setTempRange', 'focusCell', 'internalSelectionChanged', 'internalRangeDataApply']
 })
 export class RevogrOverlaySelection {
   /**  */
@@ -306,8 +306,6 @@ export class RevogrOverlaySelection {
   setTempRange!: IOverlaySelection['setTempRange'];
   /**  */
   focusCell!: IOverlaySelection['focusCell'];
-  /**  */
-  unregister!: IOverlaySelection['unregister'];
   /** Selection range changed */
   internalSelectionChanged!: IOverlaySelection['internalSelectionChanged'];
   /** Range data apply */
@@ -316,7 +314,7 @@ export class RevogrOverlaySelection {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['internalCopy', 'internalPaste', 'internalCellEdit', 'internalFocusCell', 'setEdit', 'setRange', 'setTempRange', 'focusCell', 'unregister', 'internalSelectionChanged', 'internalRangeDataApply']);
+    proxyOutputs(this, this.el, ['internalCopy', 'internalPaste', 'internalCellEdit', 'internalFocusCell', 'setEdit', 'setRange', 'setTempRange', 'focusCell', 'internalSelectionChanged', 'internalRangeDataApply']);
   }
 }
 
@@ -360,38 +358,6 @@ export class RevogrTempRange {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-  }
-}
-
-import { RevogrViewport as IRevogrViewport } from '@revolist/revogrid/dist/types/components/viewport/revogr-viewport';
-export declare interface RevogrViewport extends Components.RevogrViewport {}
-@ProxyCmp({
-  inputs: ['columnFilter', 'columnStores', 'dimensions', 'editors', 'range', 'readonly', 'resize', 'rowClass', 'rowHeaders', 'rowStores', 'useClipboard', 'uuid', 'viewports'],
-  methods: ['scrollToCoordinate', 'clearFocus', 'setEdit']
-})
-@Component({
-  selector: 'revogr-viewport',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['columnFilter', 'columnStores', 'dimensions', 'editors', 'range', 'readonly', 'resize', 'rowClass', 'rowHeaders', 'rowStores', 'useClipboard', 'uuid', 'viewports'],
-  outputs: ['setDimensionSize', 'setViewportCoordinate', 'setViewportSize', 'initialRowDragStart', 'beforeEditStart']
-})
-export class RevogrViewport {
-  /**  */
-  setDimensionSize!: IRevogrViewport['setDimensionSize'];
-  /**  */
-  setViewportCoordinate!: IRevogrViewport['setViewportCoordinate'];
-  /**  */
-  setViewportSize!: IRevogrViewport['setViewportSize'];
-  /**  */
-  initialRowDragStart!: IRevogrViewport['initialRowDragStart'];
-  /**  */
-  beforeEditStart!: IRevogrViewport['beforeEditStart'];
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['setDimensionSize', 'setViewportCoordinate', 'setViewportSize', 'initialRowDragStart', 'beforeEditStart']);
   }
 }
 
