@@ -1,7 +1,7 @@
 {
   "name": "@revolist/angular-datagrid",
   "description": "Angular data grid spreadsheet",
-  "version": "2.9.8",
+  "version": "2.9.81",
   "keywords": [
     "spreadsheet",
     "angular",
