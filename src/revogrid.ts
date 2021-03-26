@@ -9,100 +9,97 @@ import { RevoGridComponent as IRevoGridComponent } from '@revolist/revogrid/dist
 export declare interface RevoGrid extends Components.RevoGrid {}
 @ProxyCmp({
   inputs: ['autoSizeColumn', 'canFocus', 'colSize', 'columnTypes', 'columns', 'editors', 'exporting', 'filter', 'frameSize', 'grouping', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'theme', 'trimmedRows', 'useClipboard'],
-  methods: ['refresh', 'scrollToRow', 'scrollToColumnIndex', 'scrollToColumnProp', 'updateColumns', 'addTrimmed', 'scrollToCoordinate', 'setCellEdit', 'registerVNode', 'getSource', 'getVisibleSource', 'getSourceStore', 'getColumnStore', 'updateColumnSorting', 'getColumns', 'clearFocus', 'getPlugins', 'getFocused']
+  methods: ['refresh', 'scrollToRow', 'scrollToColumnIndex', 'scrollToColumnProp', 'updateColumns', 'addTrimmed', 'scrollToCoordinate', 'setCellEdit', 'registerVNode', 'getSource', 'getVisibleSource', 'getSourceStore', 'getColumnStore', 'updateColumnSorting', 'getColumns', 'clearFocus', 'getPlugins']
 })
 @Component({
   selector: 'revo-grid',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   inputs: ['autoSizeColumn', 'canFocus', 'colSize', 'columnTypes', 'columns', 'editors', 'exporting', 'filter', 'frameSize', 'grouping', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'theme', 'trimmedRows', 'useClipboard'],
-  outputs: ['beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforeaange', 'roworderchanged', 'beforesourcesortingapply', 'beforesortingapply', 'beforesorting', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'aftersourceset', 'beforecolumnsset', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart']
+  outputs: ['beforeEdit', 'beforeRangeEdit', 'afterEdit', 'beforeAutofill', 'beforeRange', 'rowOrderChanged', 'beforeSourceSortingApply', 'beforeSortingApply', 'beforeSorting', 'rowDragStart', 'headerClick', 'beforeCellFocus', 'beforeSourceSet', 'afterSourceSet', 'beforeColumnsSet', 'afterColumnsSet', 'beforeFilterApply', 'beforeFilterTrimmed', 'beforeTrimmed', 'afterTrimmed', 'viewportScroll', 'beforeExport', 'beforeEditStart']
 })
 export class RevoGrid {
   /** Before edit event.
 Triggered before edit data applied.
 Use e.preventDefault() to prevent edit data set and use you own.
 Use e.val = {your value} to replace edit result with your own. */
-  beforeedit!: IRevoGridComponent['beforeedit'];
+  beforeEdit!: IRevoGridComponent['beforeEdit'];
   /** Before range edit event.
 Triggered before range data applied, when range selection happened.
 Use e.preventDefault() to prevent edit data set and use you own. */
-  beforerangeedit!: IRevoGridComponent['beforerangeedit'];
+  beforeRangeEdit!: IRevoGridComponent['beforeRangeEdit'];
   /** After edit.
 Triggered when after data applied or Range changeged. */
-  afteredit!: IRevoGridComponent['afteredit'];
+  afterEdit!: IRevoGridComponent['afterEdit'];
   /** Before autofill.
 Triggered before autofill applied.
 Use e.preventDefault() to prevent edit data apply. */
-  beforeautofill!: IRevoGridComponent['beforeautofill'];
+  beforeAutofill!: IRevoGridComponent['beforeAutofill'];
   /** Before range apply.
 Triggered before range applied.
 Use e.preventDefault() to prevent range. */
-  beforeaange!: IRevoGridComponent['beforeaange'];
-  /** Before rgRow order apply.
-Use e.preventDefault() to prevent rgRow order change. */
-  roworderchanged!: IRevoGridComponent['roworderchanged'];
+  beforeRange!: IRevoGridComponent['beforeRange'];
+  /** Before row order apply.
+Use e.preventDefault() to prevent row order change. */
+  rowOrderChanged!: IRevoGridComponent['rowOrderChanged'];
   /** Before source update sorting apply.
 Use this event if you intended to prevent sorting on data update.
 Use e.preventDefault() to prevent sorting data change during rows source update. */
-  beforesourcesortingapply!: IRevoGridComponent['beforesourcesortingapply'];
+  beforeSourceSortingApply!: IRevoGridComponent['beforeSourceSortingApply'];
   /** Before sorting apply.
 Use e.preventDefault() to prevent sorting data change. */
-  beforesortingapply!: IRevoGridComponent['beforesortingapply'];
+  beforeSortingApply!: IRevoGridComponent['beforeSortingApply'];
   /** Before sorting event.
 Initial sorting triggered, if this event stops no other event called.
 Use e.preventDefault() to prevent sorting. */
-  beforesorting!: IRevoGridComponent['beforesorting'];
+  beforeSorting!: IRevoGridComponent['beforeSorting'];
   /** Row order change started.
-Use e.preventDefault() to prevent rgRow order change.
+Use e.preventDefault() to prevent row order change.
 Use e.text = 'new name' to change item name on start. */
-  rowdragstart!: IRevoGridComponent['rowdragstart'];
+  rowDragStart!: IRevoGridComponent['rowDragStart'];
   /** On header click. */
-  headerclick!: IRevoGridComponent['headerclick'];
+  headerClick!: IRevoGridComponent['headerClick'];
   /** Before cell focus changed.
 Use e.preventDefault() to prevent cell focus change. */
-  beforecellfocus!: IRevoGridComponent['beforecellfocus'];
-  /** Before grid focus lost happened.
-Use e.preventDefault() to prevent cell focus change. */
-  beforefocuslost!: IRevoGridComponent['beforefocuslost'];
+  beforeCellFocus!: IRevoGridComponent['beforeCellFocus'];
   /** Before data apply.
 You can override data source here */
-  beforesourceset!: IRevoGridComponent['beforesourceset'];
+  beforeSourceSet!: IRevoGridComponent['beforeSourceSet'];
   /** After rows updated */
-  aftersourceset!: IRevoGridComponent['aftersourceset'];
+  afterSourceSet!: IRevoGridComponent['afterSourceSet'];
   /** Before column update */
-  beforecolumnsset!: IRevoGridComponent['beforecolumnsset'];
+  beforeColumnsSet!: IRevoGridComponent['beforeColumnsSet'];
   /** Column updated */
-  aftercolumnsset!: IRevoGridComponent['aftercolumnsset'];
+  afterColumnsSet!: IRevoGridComponent['afterColumnsSet'];
   /** Before filter applied to data source
 Use e.preventDefault() to prevent cell focus change
 Update @collection if you wish to change filters */
-  beforefilterapply!: IRevoGridComponent['beforefilterapply'];
+  beforeFilterApply!: IRevoGridComponent['beforeFilterApply'];
   /** Before filter trimmed values
 Use e.preventDefault() to prevent value trimming and filter apply
 Update @collection if you wish to change filters
 Update @itemsToFilter if you wish to filter indexes of trimming */
-  beforefiltertrimmed!: IRevoGridComponent['beforefiltertrimmed'];
+  beforeFilterTrimmed!: IRevoGridComponent['beforeFilterTrimmed'];
   /** Before trimmed values
 Use e.preventDefault() to prevent value trimming
 Update @trimmed if you wish to filter indexes of trimming */
-  beforetrimmed!: IRevoGridComponent['beforetrimmed'];
+  beforeTrimmed!: IRevoGridComponent['beforeTrimmed'];
   /** Notify trimmed applied */
-  aftertrimmed!: IRevoGridComponent['aftertrimmed'];
+  afterTrimmed!: IRevoGridComponent['afterTrimmed'];
   /** Triggered when view port scrolled */
-  viewportscroll!: IRevoGridComponent['viewportscroll'];
+  viewportScroll!: IRevoGridComponent['viewportScroll'];
   /** Before export
 Use e.preventDefault() to prevent export
 Replace data in Event in case you want to modify it in export */
-  beforeexport!: IRevoGridComponent['beforeexport'];
+  beforeExport!: IRevoGridComponent['beforeExport'];
   /** Before edit started
 Use e.preventDefault() to prevent edit */
-  beforeeditstart!: IRevoGridComponent['beforeeditstart'];
+  beforeEditStart!: IRevoGridComponent['beforeEditStart'];
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforeaange', 'roworderchanged', 'beforesourcesortingapply', 'beforesortingapply', 'beforesorting', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'aftersourceset', 'beforecolumnsset', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart']);
+    proxyOutputs(this, this.el, ['beforeEdit', 'beforeRangeEdit', 'afterEdit', 'beforeAutofill', 'beforeRange', 'rowOrderChanged', 'beforeSourceSortingApply', 'beforeSortingApply', 'beforeSorting', 'rowDragStart', 'headerClick', 'beforeCellFocus', 'beforeSourceSet', 'afterSourceSet', 'beforeColumnsSet', 'afterColumnsSet', 'beforeFilterApply', 'beforeFilterTrimmed', 'beforeTrimmed', 'afterTrimmed', 'viewportScroll', 'beforeExport', 'beforeEditStart']);
   }
 }
 
