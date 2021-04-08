@@ -8,15 +8,15 @@ import { Components } from '@revolist/revogrid';
 import { RevoGridComponent as IRevoGridComponent } from '@revolist/revogrid/dist/types/components/revo-grid/revo-grid';
 export declare interface RevoGrid extends Components.RevoGrid {}
 @ProxyCmp({
-  inputs: ['autoSizeColumn', 'canFocus', 'colSize', 'columnTypes', 'columns', 'editors', 'exporting', 'filter', 'frameSize', 'grouping', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'theme', 'trimmedRows', 'useClipboard'],
+  inputs: ['autoSizeColumn', 'canFocus', 'colSize', 'columnTypes', 'columns', 'editors', 'exporting', 'filter', 'frameSize', 'grouping', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
   methods: ['refresh', 'scrollToRow', 'scrollToColumnIndex', 'scrollToColumnProp', 'updateColumns', 'addTrimmed', 'scrollToCoordinate', 'setCellEdit', 'registerVNode', 'getSource', 'getVisibleSource', 'getSourceStore', 'getColumnStore', 'updateColumnSorting', 'getColumns', 'clearFocus', 'getPlugins', 'getFocused']
 })
 @Component({
   selector: 'revo-grid',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['autoSizeColumn', 'canFocus', 'colSize', 'columnTypes', 'columns', 'editors', 'exporting', 'filter', 'frameSize', 'grouping', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'theme', 'trimmedRows', 'useClipboard'],
-  outputs: ['beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforeaange', 'roworderchanged', 'beforesourcesortingapply', 'beforesortingapply', 'beforesorting', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'aftersourceset', 'beforecolumnsset', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart']
+  inputs: ['autoSizeColumn', 'canFocus', 'colSize', 'columnTypes', 'columns', 'editors', 'exporting', 'filter', 'frameSize', 'grouping', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
+  outputs: ['beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforeaange', 'roworderchanged', 'beforesourcesortingapply', 'beforesortingapply', 'beforesorting', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'aftersourceset', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart']
 })
 export class RevoGrid {
   /** Before edit event.
@@ -72,6 +72,8 @@ You can override data source here */
   aftersourceset!: IRevoGridComponent['aftersourceset'];
   /** Before column update */
   beforecolumnsset!: IRevoGridComponent['beforecolumnsset'];
+  /** Before column applied but after column set gathered and viewport updated */
+  beforecolumnapplied!: IRevoGridComponent['beforecolumnapplied'];
   /** Column updated */
   aftercolumnsset!: IRevoGridComponent['aftercolumnsset'];
   /** Before filter applied to data source
@@ -102,7 +104,7 @@ Use e.preventDefault() to prevent edit */
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforeaange', 'roworderchanged', 'beforesourcesortingapply', 'beforesortingapply', 'beforesorting', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'aftersourceset', 'beforecolumnsset', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart']);
+    proxyOutputs(this, this.el, ['beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforeaange', 'roworderchanged', 'beforesourcesortingapply', 'beforesortingapply', 'beforesorting', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'aftersourceset', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart']);
   }
 }
 
@@ -231,7 +233,7 @@ export declare interface RevogrHeader extends Components.RevogrHeader {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   inputs: ['canResize', 'colData', 'columnFilter', 'dimensionCol', 'groupingDepth', 'groups', 'parent', 'selectionStore', 'viewportCol'],
-  outputs: ['initialHeaderClick', 'headerResize', 'headerDblClick']
+  outputs: ['initialHeaderClick', 'headerResize', 'headerdblClick']
 })
 export class RevogrHeader {
   /**  */
@@ -239,12 +241,12 @@ export class RevogrHeader {
   /**  */
   headerResize!: IRevogrHeaderComponent['headerResize'];
   /**  */
-  headerDblClick!: IRevogrHeaderComponent['headerDblClick'];
+  headerdblClick!: IRevogrHeaderComponent['headerdblClick'];
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['initialHeaderClick', 'headerResize', 'headerDblClick']);
+    proxyOutputs(this, this.el, ['initialHeaderClick', 'headerResize', 'headerdblClick']);
   }
 }
 
@@ -375,17 +377,19 @@ export declare interface RevogrViewportScroll extends Components.RevogrViewportS
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   inputs: ['contentHeight', 'contentWidth'],
-  outputs: ['scrollViewport', 'resizeViewport']
+  outputs: ['scrollViewport', 'resizeViewport', 'scrollchange']
 })
 export class RevogrViewportScroll {
   /**  */
   scrollViewport!: IRevogrViewportScroll['scrollViewport'];
   /**  */
   resizeViewport!: IRevogrViewportScroll['resizeViewport'];
+  /**  */
+  scrollchange!: IRevogrViewportScroll['scrollchange'];
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['scrollViewport', 'resizeViewport']);
+    proxyOutputs(this, this.el, ['scrollViewport', 'resizeViewport', 'scrollchange']);
   }
 }

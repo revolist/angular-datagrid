@@ -1,7 +1,7 @@
 {
   "name": "@revolist/angular-datagrid",
   "description": "Angular data grid spreadsheet",
-  "version": "3.0.0",
+  "version": "3.0.52",
   "keywords": [
     "spreadsheet",
     "angular",
@@ -47,7 +47,7 @@
     "dist/"
   ],
   "dependencies": {
-    "@revolist/revogrid": "^3.0.0",
+    "@revolist/revogrid": "^3.0.52",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
