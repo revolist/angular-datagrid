@@ -1,4 +1,4 @@
-import { fromEvent } from 'rxjs';
+import { fromEvent } from 'rxjs/dist/types';
 
 export const proxyInputs = (Cmp: any, inputs: string[]) => {
   const Prototype = Cmp.prototype;
