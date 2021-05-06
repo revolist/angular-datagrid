@@ -1,5 +1,5 @@
 // DIRECTIVES
-export * from './proxies/revogrid';
+export * from './revogrid';
 
 // PACKAGE MODULE
 export { RevoGridModule } from './component-library-module';

@@ -1,12 +1,11 @@
 import { NgModule } from "@angular/core";
 import { defineCustomElements } from "@revolist/revogrid/loader";
 
-import { RevoGrid } from "./proxies/revogrid";
+import { RevoGrid } from "./revogrid";
 
 defineCustomElements(window);
 
 const DECLARATIONS = [
-  // proxies
   RevoGrid
 ];
 
@@ -16,4 +15,4 @@ const DECLARATIONS = [
   imports: [],
   providers: []
 })
-export class RevoGridModule {}
+export class RevoGridModule { }
