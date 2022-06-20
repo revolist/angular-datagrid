@@ -239,7 +239,7 @@ export class RevogrHeader {
   /**  */
   initialHeaderClick!: IRevogrHeaderComponent['initialHeaderClick'];
   /**  */
-  headerResize!: IRevogrHeaderComponent['headerResize'];
+  headerResize!: IRevogrHeaderComponent['headerresize'];
   /**  */
   headerdblClick!: IRevogrHeaderComponent['headerdblClick'];
   protected el: HTMLElement;
