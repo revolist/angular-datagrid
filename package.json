@@ -47,7 +47,7 @@
     "dist/"
   ],
   "dependencies": {
-    "@revolist/revogrid": "^3.0.52",
+    "@revolist/revogrid": "^3.1.8",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
