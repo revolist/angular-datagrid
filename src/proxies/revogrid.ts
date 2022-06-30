@@ -9,14 +9,14 @@ import { RevoGridComponent as IRevoGridComponent } from '@revolist/revogrid/dist
 export declare interface RevoGrid extends Components.RevoGrid {}
 @ProxyCmp({
   inputs: ['autoSizeColumn', 'canFocus', 'colSize', 'columnTypes', 'columns', 'editors', 'exporting', 'filter', 'frameSize', 'grouping', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
-  methods: ['refresh', 'scrollToRow', 'scrollToColumnIndex', 'scrollToColumnProp', 'updateColumns', 'addTrimmed', 'scrollToCoordinate', 'setCellEdit', 'registerVNode', 'getSource', 'getVisibleSource', 'getSourceStore', 'getColumnStore', 'updateColumnSorting', 'getColumns', 'clearFocus', 'getPlugins', 'getFocused']
+  methods: ['refresh', 'scrollToRow', 'scrollToColumnIndex', 'scrollToColumnProp', 'updateColumns', 'addTrimmed', 'scrollToCoordinate', 'setCellEdit', 'registerVNode', 'getSource', 'getVisibleSource', 'getSourceStore', 'getColumnStore', 'updateColumnSorting', 'clearSorting', 'getColumns', 'clearFocus', 'getPlugins', 'getFocused', 'getSelectedRange']
 })
 @Component({
   selector: 'revo-grid',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   inputs: ['autoSizeColumn', 'canFocus', 'colSize', 'columnTypes', 'columns', 'editors', 'exporting', 'filter', 'frameSize', 'grouping', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
-  outputs: ['beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforeaange', 'roworderchanged', 'beforesourcesortingapply', 'beforesortingapply', 'beforesorting', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'aftersourceset', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart']
+  outputs: ['beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforeaange', 'roworderchanged', 'beforesourcesortingapply', 'beforesortingapply', 'beforesorting', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'aftersourceset', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize']
 })
 export class RevoGrid {
   /** Before edit event.
@@ -100,11 +100,14 @@ Replace data in Event in case you want to modify it in export */
   /** Before edit started
 Use e.preventDefault() to prevent edit */
   beforeeditstart!: IRevoGridComponent['beforeeditstart'];
+  /** After column resize
+Get resized columns */
+  aftercolumnresize!: IRevoGridComponent['aftercolumnresize'];
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforeaange', 'roworderchanged', 'beforesourcesortingapply', 'beforesortingapply', 'beforesorting', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'aftersourceset', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart']);
+    proxyOutputs(this, this.el, ['beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforeaange', 'roworderchanged', 'beforesourcesortingapply', 'beforesortingapply', 'beforesorting', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'aftersourceset', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize']);
   }
 }
 
@@ -183,14 +186,14 @@ export class RevogrEdit {
 import { FilterPanel as IFilterPanel } from '@revolist/revogrid/dist/types/plugins/filter/filter.pop';
 export declare interface RevogrFilterPanel extends Components.RevogrFilterPanel {}
 @ProxyCmp({
-  inputs: ['filterEntities', 'filterNames', 'filterTypes', 'uuid'],
+  inputs: ['disableDynamicFiltering', 'filterCaptions', 'filterEntities', 'filterItems', 'filterNames', 'filterTypes', 'uuid'],
   methods: ['show', 'getChanges']
 })
 @Component({
   selector: 'revogr-filter-panel',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['filterEntities', 'filterNames', 'filterTypes', 'uuid'],
+  inputs: ['disableDynamicFiltering', 'filterCaptions', 'filterEntities', 'filterItems', 'filterNames', 'filterTypes', 'uuid'],
   outputs: ['filterChange']
 })
 export class RevogrFilterPanel {
@@ -233,20 +236,20 @@ export declare interface RevogrHeader extends Components.RevogrHeader {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   inputs: ['canResize', 'colData', 'columnFilter', 'dimensionCol', 'groupingDepth', 'groups', 'parent', 'selectionStore', 'viewportCol'],
-  outputs: ['initialHeaderClick', 'headerResize', 'headerdblClick']
+  outputs: ['initialHeaderClick', 'headerresize', 'headerdblClick']
 })
 export class RevogrHeader {
   /**  */
   initialHeaderClick!: IRevogrHeaderComponent['initialHeaderClick'];
   /**  */
-  headerResize!: IRevogrHeaderComponent['headerresize'];
+  headerresize!: IRevogrHeaderComponent['headerresize'];
   /**  */
   headerdblClick!: IRevogrHeaderComponent['headerdblClick'];
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['initialHeaderClick', 'headerResize', 'headerdblClick']);
+    proxyOutputs(this, this.el, ['initialHeaderClick', 'headerresize', 'headerdblClick']);
   }
 }
 
@@ -320,6 +323,31 @@ export class RevogrOverlaySelection {
     c.detach();
     this.el = r.nativeElement;
     proxyOutputs(this, this.el, ['internalCopy', 'internalPaste', 'internalCellEdit', 'internalFocusCell', 'setEdit', 'setRange', 'setTempRange', 'focusCell', 'internalSelectionChanged', 'internalRangeDataApply']);
+  }
+}
+
+import { RevogrRowHeaders as IRevogrRowHeaders } from '@revolist/revogrid/dist/types/components/rowHeaders/revogr-row-headers';
+export declare interface RevogrRowHeaders extends Components.RevogrRowHeaders {}
+@ProxyCmp({
+  inputs: ['dataPorts', 'headerProp', 'height', 'resize', 'rowHeaderColumn', 'uiid']
+})
+@Component({
+  selector: 'revogr-row-headers',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['dataPorts', 'headerProp', 'height', 'resize', 'rowHeaderColumn', 'uiid'],
+  outputs: ['scrollViewport', 'elementToScroll']
+})
+export class RevogrRowHeaders {
+  /**  */
+  scrollViewport!: IRevogrRowHeaders['scrollViewport'];
+  /**  */
+  elementToScroll!: IRevogrRowHeaders['elementToScroll'];
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['scrollViewport', 'elementToScroll']);
   }
 }
 
