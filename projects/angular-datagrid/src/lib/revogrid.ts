@@ -6,7 +6,6 @@ export const DIRECTIVES = [
   d.RevogrClipboard,
   d.RevogrData,
   d.RevogrEdit,
-  d.RevogrFilterPanel,
   d.RevogrFocus,
   d.RevogrHeader,
   d.RevogrOrderEditor,
