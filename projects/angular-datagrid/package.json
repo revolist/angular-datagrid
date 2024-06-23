@@ -1,6 +1,6 @@
 {
   "name": "@revolist/angular-datagrid",
-  "version": "4.0.0",
+  "version": "4.0.11",
   "description": "Angular DataGrid Spreadsheet component with native cell render support",
   "keywords": [
     "revo-grid",
@@ -43,12 +43,12 @@
   "homepage": "https://github.com/revolist/revogrid#readme",
   "license": "MIT",
   "peerDependencies": {
+    "@revolist/revogrid": "4.0.11"
+  },
+  "devDependencies": {
     "@angular/common": "^17.3.0",
     "@angular/core": "^17.3.0",
     "@stencil/core": "^4.17.1",
-    "@revolist/revogrid": "^4.0.0"
-  },
-  "dependencies": {
     "tslib": "^2.3.0"
   },
   "sideEffects": false,

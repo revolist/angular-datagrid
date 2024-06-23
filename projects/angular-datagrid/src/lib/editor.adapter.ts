@@ -1,4 +1,4 @@
-import { EditCell, ColumnDataSchemaModel, HyperFunc, VNode, SaveData } from '@revolist/revogrid';
+import { EditCell, ColumnDataSchemaModel, HyperFunc, VNode, SaveData, EditorBase } from '@revolist/revogrid';
 import { Injector, Type } from '@angular/core';
 import { TemplateConstructor, RenderedComponent, AngularElement } from './renderer';
 export type EditorType = {
@@ -7,9 +7,9 @@ export type EditorType = {
   column: ColumnDataSchemaModel;
 } & Partial<EditCell>;
 
-export class EditorAdapter {
+export class EditorAdapter implements EditorBase  {
   public element: AngularElement | null = null;
-  public editCell: EditCell | null = null;
+  public editCell?: EditCell;
   private renderedComponent: RenderedComponent<any> | null = null;
 
   constructor(

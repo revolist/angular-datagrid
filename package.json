@@ -1,15 +1,18 @@
 {
-  "name": "angular",
-  "version": "4.0.0",
+  "name": "@revolist/angular-datagrid-project",
+  "version": "4.0.11",
   "scripts": {
     "ng": "ng",
     "dev": "ng serve",
     "build": "ng build angular-datagrid",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "release": "npm run build && cd ./dist/angular-datagrid && npm publish --public --tag pre-release"
   },
   "private": true,
   "dependencies": {
+    "@revolist/revogrid": "4.0.11"
+  },
+  "devDependencies": {
     "@angular/animations": "^17.3.0",
     "@angular/common": "^17.3.0",
     "@angular/compiler": "^17.3.0",
@@ -21,17 +24,10 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3",
-    "@stencil/core": "^4.17.1"
-  },
-  "devDependencies": {
+    "@stencil/core": "^4.17.1",
     "@angular-devkit/build-angular": "^17.3.7",
     "@angular/cli": "^17.3.7",
     "@angular/compiler-cli": "^17.3.0",
-    "karma": "~6.4.0",
-    "karma-chrome-launcher": "~3.2.0",
-    "karma-coverage": "~2.2.0",
-    "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^17.3.0",
     "typescript": "~5.4.2"
   }

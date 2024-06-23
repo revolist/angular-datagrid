@@ -6,7 +6,10 @@ import { EditorAdapter } from './editor.adapter';
  * This function creates editor constructor by wrapping it with EditorAdapter
  * which is responsible for connecting editor with grid.
  */
-export const Editor = (EditorComponent: Type<any>, injector: Injector): EditorCtr => {
+export const Editor = (
+  EditorComponent: Type<any>,
+  injector: Injector,
+): EditorCtr => {
   /**
    * Editor constructor wrapper
    * @param column column data to which editor is bound
@@ -20,5 +23,5 @@ export const Editor = (EditorComponent: Type<any>, injector: Injector): EditorCt
     close: (focusNext?: boolean) => void,
   ) {
     return new EditorAdapter(EditorComponent, injector, column, save, close);
-  } as unknown as EditorCtr;
+  };
 };
