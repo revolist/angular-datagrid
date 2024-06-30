@@ -8,7 +8,6 @@
     "watch": "ng build --watch --configuration development",
     "release": "npm run build && cd ./dist/angular-datagrid && npm publish --public --tag pre-release"
   },
-  "private": true,
   "dependencies": {
     "@revolist/revogrid": "4.0.23"
   },
