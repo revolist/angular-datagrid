@@ -1,6 +1,6 @@
 {
   "name": "@revolist/angular-datagrid-project",
-  "version": "4.0.21",
+  "version": "4.0.22",
   "scripts": {
     "ng": "ng",
     "dev": "ng serve",
@@ -10,7 +10,7 @@
   },
   "private": true,
   "dependencies": {
-    "@revolist/revogrid": "4.0.21"
+    "@revolist/revogrid": "4.0.22"
   },
   "devDependencies": {
     "@angular/animations": "^17.3.0",
