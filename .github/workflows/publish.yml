@@ -42,3 +42,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           npm_token: ${{ secrets.NPM_TOKEN }}
+          path: ./dist/angular-datagrid
