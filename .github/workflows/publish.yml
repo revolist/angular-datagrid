@@ -6,7 +6,7 @@ on:
     branches:
       - main
       - next
-
+permissions: write-all
 jobs:
   release:
     runs-on: ubuntu-latest
