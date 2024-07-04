@@ -1,10 +1,13 @@
 import { EditCell, ColumnDataSchemaModel, HyperFunc, VNode, SaveData, EditorBase } from '@revolist/revogrid';
 import { Injector, Type } from '@angular/core';
 import { TemplateConstructor, RenderedComponent, AngularElement } from './renderer';
+/**
+ * Data passed to editor
+ */
 export type EditorType = {
+  column: ColumnDataSchemaModel;
   save: (value: SaveData, preventFocus?: boolean) => void;
   close: (focusNext?: boolean) => void;
-  column: ColumnDataSchemaModel;
 } & Partial<EditCell>;
 
 export class EditorAdapter implements EditorBase  {

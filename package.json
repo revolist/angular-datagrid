@@ -9,25 +9,25 @@
     "release": "npm run build && cd ./dist/angular-datagrid && npm publish --public --tag pre-release"
   },
   "dependencies": {
-    "@revolist/revogrid": "4.0.29"
+    "@revolist/angular-datagrid": "^4.0.29"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^17.3.7",
     "@angular/animations": "^17.3.0",
+    "@angular/cli": "^17.3.7",
     "@angular/common": "^17.3.0",
     "@angular/compiler": "^17.3.0",
+    "@angular/compiler-cli": "^17.3.0",
     "@angular/core": "^17.3.0",
     "@angular/forms": "^17.3.0",
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "@stencil/core": "^4.17.1",
+    "ng-packagr": "^17.3.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.3",
-    "@stencil/core": "^4.17.1",
-    "@angular-devkit/build-angular": "^17.3.7",
-    "@angular/cli": "^17.3.7",
-    "@angular/compiler-cli": "^17.3.0",
-    "ng-packagr": "^17.3.0",
-    "typescript": "~5.4.2"
+    "typescript": "~5.4.2",
+    "zone.js": "~0.14.3"
   }
 }

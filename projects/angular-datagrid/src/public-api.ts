@@ -9,3 +9,4 @@ export * from './lib/components';
 export * from './lib/editor.adapter';
 export * from './lib/editor';
 export * from './lib/renderer';
+export { RevoGrid as RevogridStandalone } from './lib/standalone';
