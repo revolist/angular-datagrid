@@ -4,10 +4,11 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Even
 
 import { ProxyCmp, proxyOutputs } from './angular-component-lib/utils';
 
-import { Components } from '@revolist/revogrid';
+import type { Components } from '@revolist/revogrid/standalone';
 
-
+import { defineCustomElement as defineRevoGrid } from '@revolist/revogrid/standalone/revo-grid.js';
 @ProxyCmp({
+  defineCustomElementFn: defineRevoGrid,
   inputs: ['additionalData', 'applyOnClose', 'autoSizeColumn', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
   methods: ['refresh', 'setDataAt', 'scrollToRow', 'scrollToColumnIndex', 'scrollToColumnProp', 'updateColumns', 'addTrimmed', 'scrollToCoordinate', 'setCellEdit', 'setCellsFocus', 'getSource', 'getVisibleSource', 'getSourceStore', 'getColumnStore', 'updateColumnSorting', 'clearSorting', 'getColumns', 'clearFocus', 'getPlugins', 'getFocused', 'getContentSize', 'getSelectedRange']
 })
@@ -17,6 +18,7 @@ import { Components } from '@revolist/revogrid';
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   inputs: ['additionalData', 'applyOnClose', 'autoSizeColumn', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
+  standalone: true
 })
 export class RevoGrid {
   protected el: HTMLElement;
@@ -28,21 +30,21 @@ export class RevoGrid {
 }
 
 
-import type { MultiDimensionType as IRevoGridMultiDimensionType } from '@revolist/revogrid';
-import type { BeforeSaveDataDetails as IRevoGridBeforeSaveDataDetails } from '@revolist/revogrid';
-import type { BeforeRangeSaveDataDetails as IRevoGridBeforeRangeSaveDataDetails } from '@revolist/revogrid';
-import type { AfterEditEvent as IRevoGridAfterEditEvent } from '@revolist/revogrid';
-import type { ChangedRange as IRevoGridChangedRange } from '@revolist/revogrid';
-import type { ColumnRegular as IRevoGridColumnRegular } from '@revolist/revogrid';
-import type { PositionItem as IRevoGridPositionItem } from '@revolist/revogrid';
-import type { FocusedData as IRevoGridFocusedData } from '@revolist/revogrid';
-import type { DimensionRows as IRevoGridDimensionRows } from '@revolist/revogrid';
-import type { DataType as IRevoGridDataType } from '@revolist/revogrid';
-import type { ColumnCollection as IRevoGridColumnCollection } from '@revolist/revogrid';
-import type { ColumnProp as IRevoGridColumnProp } from '@revolist/revogrid';
-import type { FilterCollection as IRevoGridFilterCollection } from '@revolist/revogrid';
-import type { ViewPortScrollEvent as IRevoGridViewPortScrollEvent } from '@revolist/revogrid';
-import type { DataInput as IRevoGridDataInput } from '@revolist/revogrid';
+import type { MultiDimensionType as IRevoGridMultiDimensionType } from '@revolist/revogrid/standalone';
+import type { BeforeSaveDataDetails as IRevoGridBeforeSaveDataDetails } from '@revolist/revogrid/standalone';
+import type { BeforeRangeSaveDataDetails as IRevoGridBeforeRangeSaveDataDetails } from '@revolist/revogrid/standalone';
+import type { AfterEditEvent as IRevoGridAfterEditEvent } from '@revolist/revogrid/standalone';
+import type { ChangedRange as IRevoGridChangedRange } from '@revolist/revogrid/standalone';
+import type { ColumnRegular as IRevoGridColumnRegular } from '@revolist/revogrid/standalone';
+import type { PositionItem as IRevoGridPositionItem } from '@revolist/revogrid/standalone';
+import type { FocusedData as IRevoGridFocusedData } from '@revolist/revogrid/standalone';
+import type { DimensionRows as IRevoGridDimensionRows } from '@revolist/revogrid/standalone';
+import type { DataType as IRevoGridDataType } from '@revolist/revogrid/standalone';
+import type { ColumnCollection as IRevoGridColumnCollection } from '@revolist/revogrid/standalone';
+import type { ColumnProp as IRevoGridColumnProp } from '@revolist/revogrid/standalone';
+import type { FilterCollection as IRevoGridFilterCollection } from '@revolist/revogrid/standalone';
+import type { ViewPortScrollEvent as IRevoGridViewPortScrollEvent } from '@revolist/revogrid/standalone';
+import type { DataInput as IRevoGridDataInput } from '@revolist/revogrid/standalone';
 
 export declare interface RevoGrid extends Components.RevoGrid {
   /**

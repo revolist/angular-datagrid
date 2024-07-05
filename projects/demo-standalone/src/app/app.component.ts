@@ -1,11 +1,13 @@
 import { Component, Injector } from '@angular/core';
-import { Template, Editor, ColumnRegular, Editors } from 'angular-datagrid';
-import { CellComponent } from './cell/cell.component';
-import { EditorComponent } from './editor/editor.component';
+import { ColumnRegular, Editor, Editors, RevoGrid, Template } from 'angular-datagrid';
+import { CellComponent } from './cell.component';
+import { EditorComponent } from './editor.component';
 
 @Component({
   selector: 'app-root',
-  template: `<revo-grid [source]="source" [columns]="columns" [editors]="editors"></revo-grid>`,
+  standalone: true,
+  imports: [RevoGrid, EditorComponent, CellComponent],
+  template: `<revo-grid style="height: 200px; width: 200px" [columns]="columns" [source]="source" [editors]="editors"></revo-grid>`
 })
 export class AppComponent {
   source: any[] = [  {

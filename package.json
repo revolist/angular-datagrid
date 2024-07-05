@@ -3,7 +3,8 @@
   "version": "4.0.37",
   "scripts": {
     "ng": "ng",
-    "dev": "ng serve",
+    "dev": "ng serve demo",
+    "dev:s": "ng serve demo-standalone",
     "build": "ng build angular-datagrid",
     "watch": "ng build --watch --configuration development",
     "release": "npm run build && cd ./dist/angular-datagrid && npm publish --public --tag pre-release"
