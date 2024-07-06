@@ -3,5 +3,9 @@
   "dest": "../../dist/angular-datagrid",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "allowedNonPeerDependencies": [
+    "@stencil/core",
+    "@revolist/revogrid"
+  ]
 }
