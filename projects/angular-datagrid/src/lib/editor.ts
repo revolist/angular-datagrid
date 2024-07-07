@@ -1,5 +1,5 @@
 import { ColumnDataSchemaModel, EditorCtr, SaveData } from '@revolist/revogrid';
-import { Injector, Type } from '@angular/core';
+import { Injector, Type, inject } from '@angular/core';
 import { EditorAdapter } from './editor.adapter';
 /**
  * Create editor constructor.
@@ -8,7 +8,7 @@ import { EditorAdapter } from './editor.adapter';
  */
 export const Editor = (
   EditorComponent: Type<any>,
-  injector: Injector,
+  injector = inject(Injector),
 ): EditorCtr => {
   /**
    * Editor constructor wrapper

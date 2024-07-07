@@ -1,4 +1,4 @@
-import { Component, Injector } from '@angular/core';
+import { Component } from '@angular/core';
 import { Template, Editor, ColumnRegular, Editors } from 'angular-datagrid';
 import { CellComponent } from './cell/cell.component';
 import { EditorComponent } from './editor/editor.component';
@@ -15,7 +15,7 @@ export class AppComponent {
   columns: ColumnRegular[] = [];
   editors: Editors = {};
 
-  constructor(private ref: Injector) {
+  constructor() {
     this.source = [
       {
         name: '1',
@@ -32,13 +32,13 @@ export class AppComponent {
         prop: 'name',
         name: 'First',
         editor: MY_EDITOR,
-        cellTemplate: Template(CellComponent, ref),
+        cellTemplate: Template(CellComponent),
       },
       {
         prop: 'details',
         name: 'Second',
       },
     ];
-    this.editors = { [MY_EDITOR]: Editor(EditorComponent, ref) };
+    this.editors = { [MY_EDITOR]: Editor(EditorComponent) };
   }
 }
