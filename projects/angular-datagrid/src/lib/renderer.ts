@@ -78,6 +78,7 @@ export const Template = (
     props.addition = addition;
     let lastEl: RenderedComponent<any> | null = null;
     return h('span', {
+      key: `${p.prop}-${p.rowIndex}`,
       ref: (el: AngularElement | null) => {
         lastEl = TemplateConstructor(el, AngularComponent, props, injector, lastEl);
       }
