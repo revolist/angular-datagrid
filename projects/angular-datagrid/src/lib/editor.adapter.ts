@@ -34,6 +34,7 @@ export class EditorAdapter implements EditorBase  {
 
   render(h: HyperFunc<VNode>) {
     return h('span', {
+      key: `${this.column.prop}-${this.editCell?.rowIndex || 0}`,
       ref: (el: AngularElement) => 
         this.renderedComponent = TemplateConstructor(
           el,
