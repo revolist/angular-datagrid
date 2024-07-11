@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ColumnRegular, Editor, Editors, RevoGrid, Template } from 'angular-datagrid';
+import { type ColumnRegular, Editor, type Editors, RevoGrid, Template } from 'angular-datagrid';
 import { CellComponent } from './cell.component';
 import { EditorComponent } from './editor.component';
 
