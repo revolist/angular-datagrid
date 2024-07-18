@@ -1,6 +1,6 @@
 {
   "name": "@revolist/angular-datagrid-project",
-  "version": "4.8.3",
+  "version": "4.8.4",
   "scripts": {
     "ng": "ng",
     "dev": "ng serve demo",
@@ -10,25 +10,25 @@
     "release": "npm run build && cd ./dist/angular-datagrid && npm publish --public --tag pre-release"
   },
   "dependencies": {
-    "@stencil/core": "^4.19.2",
-    "@revolist/revogrid": "4.8.2"
+    "@revolist/revogrid": "4.8.2",
+    "@stencil/core": "^4.19.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^18.0.7",
-    "@angular/animations": "^18.0.6",
+    "@angular-devkit/build-angular": "^18.1.1",
+    "@angular/animations": "^18.1.1",
     "@angular/cli": "^18.0.7",
-    "@angular/common": "^18.0.6",
-    "@angular/compiler": "^18.0.6",
-    "@angular/compiler-cli": "^18.0.6",
-    "@angular/core": "^18.0.6",
-    "@angular/forms": "^18.0.6",
-    "@angular/platform-browser": "^18.0.6",
-    "@angular/platform-browser-dynamic": "^18.0.6",
-    "@angular/router": "^18.0.6",
-    "ng-packagr": "^18.0.0",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
-    "typescript": "~5.4.2",
-    "zone.js": "~0.14.3"
+    "@angular/common": "^18.1.1",
+    "@angular/compiler": "^18.1.1",
+    "@angular/compiler-cli": "^18.1.1",
+    "@angular/core": "^18.1.1",
+    "@angular/forms": "^18.1.1",
+    "@angular/platform-browser": "^18.1.1",
+    "@angular/platform-browser-dynamic": "^18.1.1",
+    "@angular/router": "^18.1.1",
+    "ng-packagr": "^18.1.0",
+    "rxjs": "~7.8.1",
+    "typescript": "~5.5.3",
+    "zone.js": "~0.14.8",
+    "tslib": "^2.6.3"
   }
 }
