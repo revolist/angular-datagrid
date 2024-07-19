@@ -25,7 +25,7 @@ export class RevoGrid {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['contentsizechanged', 'beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforeange', 'afterfocus', 'roworderchanged', 'beforesortingapply', 'beforesorting', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'beforeanysource', 'aftersourceset', 'afteranysource', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize', 'beforerowdefinition', 'filterconfigchanged', 'rowheaderschanged', 'beforegridrender', 'aftergridinit']);
+    proxyOutputs(this, this.el, ['contentsizechanged', 'beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforerange', 'afterfocus', 'roworderchanged', 'beforesortingapply', 'beforesorting', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'beforeanysource', 'aftersourceset', 'afteranysource', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize', 'beforerowdefinition', 'filterconfigchanged', 'rowheaderschanged', 'beforegridrender', 'aftergridinit']);
   }
 }
 
@@ -77,7 +77,7 @@ To prevent the default behavior of applying the edit data, you can call `e.preve
    * Triggered before range applied.
 Use e.preventDefault() to prevent range.
    */
-  beforeange: EventEmitter<CustomEvent<IRevoGridChangedRange>>;
+  beforerange: EventEmitter<CustomEvent<IRevoGridChangedRange>>;
   /**
    * Triggered after focus render finished.
 Can be used to access a focus element through `event.target`
