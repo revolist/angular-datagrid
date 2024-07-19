@@ -19,7 +19,7 @@ function updateProps<T>(el: AngularElement, newProps: T) {
     return;
   }
   el.componentRef.instance.props = newProps;
-  el.componentRef.instance.ngOnChanges({
+  el.componentRef.instance.ngOnChanges?.({
     props: {
       currentValue: newProps,
       previousValue: el.componentRef.instance.props,
