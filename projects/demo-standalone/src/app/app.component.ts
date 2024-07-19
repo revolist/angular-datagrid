@@ -7,7 +7,7 @@ import { EditorComponent } from './editor.component';
   selector: 'app-root',
   standalone: true,
   imports: [RevoGrid, EditorComponent, CellComponent],
-  template: `<revo-grid style="height: 200px; width: 200px" [columns]="columns" [source]="source" [editors]="editors"></revo-grid>`
+  template: `<revo-grid style="height: 200px; width: 200px" [filter]="true" [columns]="columns" [source]="source" [editors]="editors"></revo-grid>`
 })
 export class AppComponent {
   source: any[] = [  {
