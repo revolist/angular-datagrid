@@ -5,7 +5,7 @@ import { defineCustomElement as defineFilterPanel } from '@revolist/revogrid/sta
 // Filter is defined as a standalone component plugin and should be imported here
 defineFilterPanel?.();
 
-export type * from '@revolist/revogrid';
+export * from '@revolist/revogrid';
 export * from './lib/components';
 export * from './lib/editor.adapter';
 export * from './lib/editor';
