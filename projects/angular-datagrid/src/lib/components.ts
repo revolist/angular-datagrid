@@ -25,7 +25,7 @@ export class RevoGrid {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['contentsizechanged', 'beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforerange', 'afterfocus', 'roworderchanged', 'beforesortingapply', 'beforesorting', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'beforeanysource', 'aftersourceset', 'afteranysource', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize', 'beforerowdefinition', 'filterconfigchanged', 'rowheaderschanged', 'beforegridrender', 'aftergridinit']);
+    proxyOutputs(this, this.el, ['contentsizechanged', 'beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforerange', 'afterfocus', 'roworderchanged', 'beforesortingapply', 'beforesorting', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'beforeanysource', 'aftersourceset', 'afteranysource', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize', 'beforerowdefinition', 'filterconfigchanged', 'rowheaderschanged', 'beforegridrender', 'aftergridinit', 'additionaldatachanged', 'afterthemechanged']);
   }
 }
 
@@ -45,6 +45,7 @@ import type { ColumnProp as IRevoGridColumnProp } from '@revolist/revogrid/stand
 import type { FilterCollection as IRevoGridFilterCollection } from '@revolist/revogrid/standalone';
 import type { ViewPortScrollEvent as IRevoGridViewPortScrollEvent } from '@revolist/revogrid/standalone';
 import type { DataInput as IRevoGridDataInput } from '@revolist/revogrid/standalone';
+import type { Theme as IRevoGridTheme } from '@revolist/revogrid/standalone';
 
 export declare interface RevoGrid extends Components.RevoGrid {
   /**
@@ -220,6 +221,14 @@ Useful for modifying or preventing the default row definition behavior.
    * Emmited after the grid is initialized. Connected to the DOM.
    */
   aftergridinit: EventEmitter<CustomEvent<any>>;
+  /**
+   * Emmited after the additional data is changed
+   */
+  additionaldatachanged: EventEmitter<CustomEvent<any>>;
+  /**
+   * Emmited after the theme is changed
+   */
+  afterthemechanged: EventEmitter<CustomEvent<IRevoGridTheme>>;
 }
 
 
