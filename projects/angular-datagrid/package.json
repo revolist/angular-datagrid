@@ -1,6 +1,6 @@
 {
   "name": "@revolist/angular-datagrid",
-  "version": "4.8.13",
+  "version": "4.8.14",
   "description": "Angular DataGrid Spreadsheet component with native cell render support",
   "keywords": [
     "revo-grid",
