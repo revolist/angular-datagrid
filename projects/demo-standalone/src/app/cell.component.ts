@@ -11,6 +11,6 @@ export class CellComponent {
   @Input() props!: ColumnDataSchemaModel;
 
   get value() {
-    return this.props.rowIndex;
+    return this.props.prop;
   }
 }

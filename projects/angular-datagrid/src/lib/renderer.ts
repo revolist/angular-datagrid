@@ -3,7 +3,7 @@
  * Handles the rendering and lifecycle of Angular components within StencilJS using updated Angular APIs.
  */
 import { Injector, ComponentRef, Type, ApplicationRef, createComponent, EnvironmentInjector, inject } from '@angular/core';
-import { ColumnDataSchemaModel } from '@revolist/revogrid';
+import { ColumnDataSchemaModel, ColumnTemplateProp } from '@revolist/revogrid';
 
 export interface AngularElement extends HTMLElement {
   componentRef?: ComponentRef<any>;  // Reference to the Angular component
@@ -73,12 +73,12 @@ export const Template = (
   customProps?: any,
   injector = inject(Injector)
 ) => {
-  return (h: any, p: ColumnDataSchemaModel, addition?: any) => {
+  return (h: any, p: ColumnDataSchemaModel | ColumnTemplateProp, addition?: any) => {
     const props = customProps ? { ...customProps, ...p } : p;
     props.addition = addition;
     let lastEl: RenderedComponent<any> | null = null;
     return h('span', {
-      key: `${p.prop}-${p.rowIndex}`,
+      key: `${p.prop}-${p.rowIndex || 0}`,
       ref: (el: AngularElement | null) => {
         lastEl = TemplateConstructor(el, AngularComponent, props, injector, lastEl);
       }
