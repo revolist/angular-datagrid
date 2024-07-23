@@ -10,7 +10,7 @@
     "release": "npm run build && cd ./dist/angular-datagrid && npm publish --public --tag pre-release"
   },
   "dependencies": {
-    "@revolist/revogrid": "4.8.12",
+    "@revolist/revogrid": "4.8.13",
     "@stencil/core": "^4.19.2"
   },
   "devDependencies": {
