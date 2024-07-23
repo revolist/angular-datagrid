@@ -1,6 +1,6 @@
 {
   "name": "@revolist/angular-datagrid-project",
-  "version": "4.8.12",
+  "version": "4.8.13",
   "scripts": {
     "ng": "ng",
     "dev": "ng serve demo",

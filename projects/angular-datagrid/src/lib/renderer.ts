@@ -45,7 +45,6 @@ export function TemplateConstructor<T extends Object>(
     const applicationRef = injector.get(ApplicationRef);
     const environmentInjector = injector.get(EnvironmentInjector);
     const componentRef = createComponent(AngularComponent, { environmentInjector });
-    console.log(componentRef.location.nativeElement);
     applicationRef.attachView(componentRef.hostView);
     componentRef.instance.props = initialProps;
     componentRef.changeDetectorRef.detectChanges();
