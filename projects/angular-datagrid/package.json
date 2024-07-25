@@ -43,7 +43,7 @@
   "homepage": "https://github.com/revolist/revogrid#readme",
   "license": "MIT",
   "dependencies": {
-    "@revolist/revogrid": "4.8.13",
+    "@revolist/revogrid": "4.8.14",
     "@stencil/core": "^4.19.2",
     "tslib": "^2.6.3"
   },
