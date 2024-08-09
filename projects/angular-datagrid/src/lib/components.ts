@@ -154,7 +154,7 @@ Useful for performing actions or modifications before the final application of t
   /**
    * Column updated
    */
-  aftercolumnsset: EventEmitter<CustomEvent<{ columns: IRevoGridColumnCollection; order: Record<IRevoGridColumnProp, 'asc' | 'desc'>; }>>;
+  aftercolumnsset: EventEmitter<CustomEvent<{ columns: IRevoGridColumnCollection; order: Record<IRevoGridColumnProp, 'asc' | 'desc' | undefined>; }>>;
   /**
    * Emitted before applying a filter to the data source.
 Use e.preventDefault() to prevent cell focus change.
