@@ -9,7 +9,7 @@ import type { Components } from '@revolist/revogrid/standalone';
 import { defineCustomElement as defineRevoGrid } from '@revolist/revogrid/standalone/revo-grid.js';
 @ProxyCmp({
   defineCustomElementFn: defineRevoGrid,
-  inputs: ['additionalData', 'applyOnClose', 'autoSizeColumn', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
+  inputs: ['accessible', 'additionalData', 'applyOnClose', 'autoSizeColumn', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
   methods: ['refresh', 'setDataAt', 'scrollToRow', 'scrollToColumnIndex', 'scrollToColumnProp', 'updateColumns', 'addTrimmed', 'scrollToCoordinate', 'setCellEdit', 'setCellsFocus', 'getSource', 'getVisibleSource', 'getSourceStore', 'getColumnStore', 'updateColumnSorting', 'clearSorting', 'getColumns', 'clearFocus', 'getPlugins', 'getFocused', 'getContentSize', 'getSelectedRange']
 })
 @Component({
@@ -17,7 +17,7 @@ import { defineCustomElement as defineRevoGrid } from '@revolist/revogrid/standa
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['additionalData', 'applyOnClose', 'autoSizeColumn', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
+  inputs: ['accessible', 'additionalData', 'applyOnClose', 'autoSizeColumn', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
   standalone: true
 })
 export class RevoGrid {
@@ -35,6 +35,7 @@ import type { BeforeSaveDataDetails as IRevoGridBeforeSaveDataDetails } from '@r
 import type { BeforeRangeSaveDataDetails as IRevoGridBeforeRangeSaveDataDetails } from '@revolist/revogrid/standalone';
 import type { AfterEditEvent as IRevoGridAfterEditEvent } from '@revolist/revogrid/standalone';
 import type { ChangedRange as IRevoGridChangedRange } from '@revolist/revogrid/standalone';
+import type { FocusAfterRenderEvent as IRevoGridFocusAfterRenderEvent } from '@revolist/revogrid/standalone';
 import type { ColumnRegular as IRevoGridColumnRegular } from '@revolist/revogrid/standalone';
 import type { PositionItem as IRevoGridPositionItem } from '@revolist/revogrid/standalone';
 import type { FocusedData as IRevoGridFocusedData } from '@revolist/revogrid/standalone';
@@ -81,9 +82,10 @@ Use e.preventDefault() to prevent range.
   beforerange: EventEmitter<CustomEvent<IRevoGridChangedRange>>;
   /**
    * Triggered after focus render finished.
-Can be used to access a focus element through `event.target`
+Can be used to access a focus element through `event.target`.
+This is just a duplicate of `afterfocus` from `revogr-focus.tsx`.
    */
-  afterfocus: EventEmitter<CustomEvent<{ model: any; column: IRevoGridColumnRegular; }>>;
+  afterfocus: EventEmitter<CustomEvent<IRevoGridFocusAfterRenderEvent>>;
   /**
    * This event is triggered before the order of `rgRow` is applied.
 To prevent the default behavior of changing the order of `rgRow`, you can call `e.preventDefault()`.
