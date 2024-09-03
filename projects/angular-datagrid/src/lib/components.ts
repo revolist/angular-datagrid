@@ -160,7 +160,7 @@ Useful for performing actions or modifications before the final application of t
   /**
    * Emitted before applying a filter to the data source.
 Use e.preventDefault() to prevent cell focus change.
-Modify the @collection if you need to change filters.
+Modify if you need to change filters.
    */
   beforefilterapply: EventEmitter<CustomEvent<{ collection: IRevoGridFilterCollection }>>;
   /**
