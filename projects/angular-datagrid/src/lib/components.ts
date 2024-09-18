@@ -10,7 +10,7 @@ import { defineCustomElement as defineRevoGrid } from '@revolist/revogrid/standa
 @ProxyCmp({
   defineCustomElementFn: defineRevoGrid,
   inputs: ['accessible', 'additionalData', 'applyOnClose', 'autoSizeColumn', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
-  methods: ['refresh', 'setDataAt', 'scrollToRow', 'scrollToColumnIndex', 'scrollToColumnProp', 'updateColumns', 'addTrimmed', 'scrollToCoordinate', 'setCellEdit', 'setCellsFocus', 'getSource', 'getVisibleSource', 'getSourceStore', 'getColumnStore', 'updateColumnSorting', 'clearSorting', 'getColumns', 'clearFocus', 'getPlugins', 'getFocused', 'getContentSize', 'getSelectedRange']
+  methods: ['refresh', 'setDataAt', 'scrollToRow', 'scrollToColumnIndex', 'scrollToColumnProp', 'updateColumns', 'addTrimmed', 'scrollToCoordinate', 'setCellEdit', 'setCellsFocus', 'getSource', 'getVisibleSource', 'getSourceStore', 'getColumnStore', 'updateColumnSorting', 'clearSorting', 'getColumns', 'clearFocus', 'getPlugins', 'getFocused', 'getContentSize', 'getSelectedRange', 'refreshExtraElements']
 })
 @Component({
   selector: 'revo-grid',
