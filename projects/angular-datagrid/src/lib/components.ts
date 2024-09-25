@@ -56,49 +56,49 @@ To retrieve the actual content size, you can utilize the `getContentSize` functi
    */
   contentsizechanged: EventEmitter<CustomEvent<IRevoGridMultiDimensionType>>;
   /**
-   * This event is triggered before the data is edited.
+   * Before the data is edited.
 To prevent the default behavior of editing data and use your own implementation, call `e.preventDefault()`.
 To override the edit result with your own value, set the `e.val` property to your desired value.
    */
   beforeedit: EventEmitter<CustomEvent<IRevoGridBeforeSaveDataDetails>>;
   /**
-   * This event is triggered before applying range data, specifically when a range selection occurs.
+   * Before applying range data, specifically when a range selection occurs.
 To customize the data and prevent the default edit data from being set, you can call `e.preventDefault()`.
    */
   beforerangeedit: EventEmitter<CustomEvent<IRevoGridBeforeRangeSaveDataDetails>>;
   /**
-   * Triggered after data applied or range changed.
+   * After data applied or range changed.
    */
   afteredit: EventEmitter<CustomEvent<IRevoGridAfterEditEvent>>;
   /**
-   * This event is triggered before autofill is applied.
+   * Before autofill is applied.
 To prevent the default behavior of applying the edit data, you can call `e.preventDefault()`.
    */
   beforeautofill: EventEmitter<CustomEvent<IRevoGridChangedRange>>;
   /**
-   * Triggered before range applied.
+   * Before autofill is applied. Runs before beforeautofill event.
 Use e.preventDefault() to prevent range.
    */
   beforerange: EventEmitter<CustomEvent<IRevoGridChangedRange>>;
   /**
-   * Triggered after focus render finished.
+   * After focus render finished.
 Can be used to access a focus element through `event.target`.
 This is just a duplicate of `afterfocus` from `revogr-focus.tsx`.
    */
   afterfocus: EventEmitter<CustomEvent<IRevoGridFocusAfterRenderEvent>>;
   /**
-   * This event is triggered before the order of `rgRow` is applied.
+   * Before the order of `rgRow` is applied.
 To prevent the default behavior of changing the order of `rgRow`, you can call `e.preventDefault()`.
    */
   roworderchanged: EventEmitter<CustomEvent<{ from: number; to: number }>>;
   /**
-   * Triggered by sorting.plugin.ts
+   * By sorting.plugin.ts
 Before sorting apply.
 Use e.preventDefault() to prevent sorting data change.
    */
   beforesortingapply: EventEmitter<CustomEvent<{ column: IRevoGridColumnRegular; order: 'desc' | 'asc'; additive: boolean; }>>;
   /**
-   * Triggered by sorting.plugin.ts
+   * By sorting.plugin.ts
 Before sorting event.
 Initial sorting triggered, if this event stops no other event called.
 Use e.preventDefault() to prevent sorting.
@@ -115,12 +115,12 @@ To change the item name at the start of the row order change, you can set `e.tex
    */
   headerclick: EventEmitter<CustomEvent<IRevoGridColumnRegular>>;
   /**
-   * This event is triggered before the cell focus is changed.
+   * Before the cell focus is changed.
 To prevent the default behavior of changing the cell focus, you can call `e.preventDefault()`.
    */
   beforecellfocus: EventEmitter<CustomEvent<IRevoGridBeforeSaveDataDetails>>;
   /**
-   * This event is triggered before the grid focus is lost.
+   * Before the grid focus is lost.
 To prevent the default behavior of changing the cell focus, you can call `e.preventDefault()`.
    */
   beforefocuslost: EventEmitter<CustomEvent<IRevoGridFocusedData | null>>;
