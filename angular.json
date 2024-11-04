@@ -228,5 +228,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

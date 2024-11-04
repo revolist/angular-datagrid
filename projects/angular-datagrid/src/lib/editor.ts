@@ -1,4 +1,4 @@
-import { ColumnDataSchemaModel, EditorCtr, SaveData } from '@revolist/revogrid';
+import type { ColumnDataSchemaModel, EditorCtr } from '@revolist/revogrid';
 import { Injector, Type, inject } from '@angular/core';
 import { EditorAdapter } from './editor.adapter';
 /**
@@ -19,7 +19,7 @@ export const Editor = (
    */
   return function (
     column: ColumnDataSchemaModel,
-    save: (value: SaveData, preventFocus?: boolean) => void,
+    save: (value: any, preventFocus?: boolean) => void,
     close: (focusNext?: boolean) => void,
   ) {
     return new EditorAdapter(EditorComponent, injector, column, save, close);
