@@ -37,7 +37,7 @@ import type { AfterEditEvent as IRevoGridAfterEditEvent } from '@revolist/revogr
 import type { ChangedRange as IRevoGridChangedRange } from '@revolist/revogrid/standalone';
 import type { FocusAfterRenderEvent as IRevoGridFocusAfterRenderEvent } from '@revolist/revogrid/standalone';
 import type { ColumnRegular as IRevoGridColumnRegular } from '@revolist/revogrid/standalone';
-import type { PositionItem as IRevoGridPositionItem } from '@revolist/revogrid/standalone';
+import type { RowDragStartDetails as IRevoGridRowDragStartDetails } from '@revolist/revogrid/standalone';
 import type { FocusedData as IRevoGridFocusedData } from '@revolist/revogrid/standalone';
 import type { DimensionRows as IRevoGridDimensionRows } from '@revolist/revogrid/standalone';
 import type { DataType as IRevoGridDataType } from '@revolist/revogrid/standalone';
@@ -109,7 +109,7 @@ Use e.preventDefault() to prevent sorting.
 To prevent the default behavior of changing the row order, you can call `e.preventDefault()`.
 To change the item name at the start of the row order change, you can set `e.text` to the desired new name.
    */
-  rowdragstart: EventEmitter<CustomEvent<{ pos: IRevoGridPositionItem; text: string; }>>;
+  rowdragstart: EventEmitter<CustomEvent<IRevoGridRowDragStartDetails>>;
   /**
    * On header click.
    */
