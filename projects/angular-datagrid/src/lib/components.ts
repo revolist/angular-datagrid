@@ -43,7 +43,7 @@ import type { DimensionRows as IRevoGridDimensionRows } from '@revolist/revogrid
 import type { DataType as IRevoGridDataType } from '@revolist/revogrid/standalone';
 import type { ColumnCollection as IRevoGridColumnCollection } from '@revolist/revogrid/standalone';
 import type { ColumnProp as IRevoGridColumnProp } from '@revolist/revogrid/standalone';
-import type { FilterCollection as IRevoGridFilterCollection } from '@revolist/revogrid/standalone';
+import type { FilterCollectionItem as IRevoGridFilterCollectionItem } from '@revolist/revogrid/standalone';
 import type { ViewPortScrollEvent as IRevoGridViewPortScrollEvent } from '@revolist/revogrid/standalone';
 import type { DataInput as IRevoGridDataInput } from '@revolist/revogrid/standalone';
 import type { SortingConfig as IRevoGridSortingConfig } from '@revolist/revogrid/standalone';
@@ -163,14 +163,14 @@ Useful for performing actions or modifications before the final application of t
 Use e.preventDefault() to prevent cell focus change.
 Modify if you need to change filters.
    */
-  beforefilterapply: EventEmitter<CustomEvent<{ collection: IRevoGridFilterCollection }>>;
+  beforefilterapply: EventEmitter<CustomEvent<{ collection: Record<IRevoGridColumnProp, IRevoGridFilterCollectionItem> }>>;
   /**
    * Emitted before applying a filter to the data source.
 Use e.preventDefault() to prevent the default behavior of trimming values and applying the filter.
 Modify the `collection` property if you want to change the filters.
 Modify the `itemsToFilter` property if you want to filter the indexes for trimming.
    */
-  beforefiltertrimmed: EventEmitter<CustomEvent<{ collection: IRevoGridFilterCollection; itemsToFilter: Record<number, boolean>; }>>;
+  beforefiltertrimmed: EventEmitter<CustomEvent<{ collection: Record<IRevoGridColumnProp, IRevoGridFilterCollectionItem>; itemsToFilter: Record<number, boolean>; }>>;
   /**
    * Emitted before trimming values.
 Use e.preventDefault() to prevent the default behavior of trimming values.
