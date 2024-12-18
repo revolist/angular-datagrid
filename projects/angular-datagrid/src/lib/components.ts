@@ -25,7 +25,7 @@ export class RevoGrid {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['contentsizechanged', 'beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforerange', 'afterfocus', 'roworderchanged', 'beforesortingapply', 'beforesorting', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'beforeanysource', 'aftersourceset', 'afteranysource', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize', 'beforerowdefinition', 'filterconfigchanged', 'sortingconfigchanged', 'rowheaderschanged', 'beforegridrender', 'aftergridrender', 'aftergridinit', 'additionaldatachanged', 'afterthemechanged', 'created']);
+    proxyOutputs(this, this.el, ['contentsizechanged', 'beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforerange', 'afterfocus', 'roworderchanged', 'beforesorting', 'beforesourcesortingapply', 'beforesortingapply', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'beforeanysource', 'aftersourceset', 'afteranysource', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize', 'beforerowdefinition', 'filterconfigchanged', 'sortingconfigchanged', 'rowheaderschanged', 'beforegridrender', 'aftergridrender', 'aftergridinit', 'additionaldatachanged', 'afterthemechanged', 'created']);
   }
 }
 
@@ -37,9 +37,10 @@ import type { AfterEditEvent as IRevoGridAfterEditEvent } from '@revolist/revogr
 import type { ChangedRange as IRevoGridChangedRange } from '@revolist/revogrid/standalone';
 import type { FocusAfterRenderEvent as IRevoGridFocusAfterRenderEvent } from '@revolist/revogrid/standalone';
 import type { ColumnRegular as IRevoGridColumnRegular } from '@revolist/revogrid/standalone';
+import type { DimensionRows as IRevoGridDimensionRows } from '@revolist/revogrid/standalone';
+import type { SortingOrder as IRevoGridSortingOrder } from '@revolist/revogrid/standalone';
 import type { RowDragStartDetails as IRevoGridRowDragStartDetails } from '@revolist/revogrid/standalone';
 import type { FocusedData as IRevoGridFocusedData } from '@revolist/revogrid/standalone';
-import type { DimensionRows as IRevoGridDimensionRows } from '@revolist/revogrid/standalone';
 import type { DataType as IRevoGridDataType } from '@revolist/revogrid/standalone';
 import type { ColumnCollection as IRevoGridColumnCollection } from '@revolist/revogrid/standalone';
 import type { ColumnProp as IRevoGridColumnProp } from '@revolist/revogrid/standalone';
@@ -93,18 +94,25 @@ To prevent the default behavior of changing the order of `rgRow`, you can call `
    */
   roworderchanged: EventEmitter<CustomEvent<{ from: number; to: number }>>;
   /**
-   * By sorting.plugin.ts
-Before sorting apply.
-Use e.preventDefault() to prevent sorting data change.
-   */
-  beforesortingapply: EventEmitter<CustomEvent<{ column: IRevoGridColumnRegular; order: 'desc' | 'asc'; additive: boolean; }>>;
-  /**
-   * By sorting.plugin.ts
-Before sorting event.
-Initial sorting triggered, if this event stops no other event called.
-Use e.preventDefault() to prevent sorting.
+   * By `sorting.plugin.ts`
+<br>Triggered immediately after header click.
+<br>First in sorting event sequence. Ff this event stops no other event called.
+<br>Use `e.preventDefault()` to prevent sorting.
    */
   beforesorting: EventEmitter<CustomEvent<{ column: IRevoGridColumnRegular; order: 'desc' | 'asc'; additive: boolean; }>>;
+  /**
+   * By `sorting.plugin.ts`
+<br>Same as `beforesorting` but triggered after `beforeanysource` (when source is changed).
+<br>Use `e.preventDefault()` to prevent sorting data change.
+   */
+  beforesourcesortingapply: EventEmitter<CustomEvent<{ type: IRevoGridDimensionRows; sorting?: IRevoGridSortingOrder; }>>;
+  /**
+   * By `sorting.plugin.ts`
+<br> After `beforesorting`
+<br>Triggered after column data updated with new sorting order.
+<br>Use `e.preventDefault()` to prevent sorting data change.
+   */
+  beforesortingapply: EventEmitter<CustomEvent<{ column: IRevoGridColumnRegular; order: 'desc' | 'asc'; additive: boolean; }>>;
   /**
    * This event is triggered when the row order change is started.
 To prevent the default behavior of changing the row order, you can call `e.preventDefault()`.
