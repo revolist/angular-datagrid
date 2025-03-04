@@ -14,19 +14,33 @@ export interface RenderedComponent<T> {
   destroy: () => void;               // Function to destroy the component
 }
 
-function updateProps<T>(el: AngularElement, newProps: T) {
+function updateProps<T extends object>(el: AngularElement, newProps: T) {
   if (!el.componentRef?.instance) {
     return;
   }
+  
+  
+  // Update both ways to ensure it works with different component implementations
   el.componentRef.instance.props = newProps;
-  el.componentRef.instance.ngOnChanges?.({
-    props: {
-      currentValue: newProps,
-      previousValue: el.componentRef.instance.props,
-      firstChange: false,
-      isFirstChange: () => false,
-    },
-  });
+  el.componentRef.setInput('props', newProps);
+  
+  // Handle ngOnChanges if component implements it
+  if (el.componentRef.instance.ngOnChanges) {
+    const previousValue = el.componentRef.instance.props;
+    const simpleChanges = {
+      props: {
+        previousValue,
+        currentValue: newProps,
+        firstChange: previousValue === undefined,
+        isFirstChange: () => previousValue === undefined
+      }
+    };
+    el.componentRef.instance.ngOnChanges(simpleChanges);
+  }
+  
+  // Force component to check for updates
+  el.componentRef.changeDetectorRef.markForCheck();
+  el.componentRef.changeDetectorRef.detectChanges();
 }
 
 export function TemplateConstructor<T extends Object>(

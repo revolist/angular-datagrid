@@ -16,21 +16,16 @@ export class AppComponent {
   editors: Editors = {};
 
   constructor() {
-    this.source = [
-      {
-        name: '1',
-        details: 'Item 1',
-      },
-      {
-        name: '2',
-        details: 'Item 2',
-      },
-    ];
+    this.source = Array.from({ length: 100 }, (_, i) => ({
+      name: (i + 1).toString(),
+      details: `Item ${i + 1}`
+    }));
     const MY_EDITOR = 'custom-editor';
     this.columns = [
       {
         prop: 'name',
         name: 'First',
+        sortable: true,
         editor: MY_EDITOR,
         cellTemplate: Template(CellComponent),
       },
