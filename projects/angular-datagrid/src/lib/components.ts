@@ -94,20 +94,20 @@ To prevent the default behavior of changing the order of `rgRow`, you can call `
    */
   roworderchanged: EventEmitter<CustomEvent<{ from: number; to: number }>>;
   /**
-   * By `sorting.plugin.ts`
+   * By `SortingPlugin`
 <br>Triggered immediately after header click.
 <br>First in sorting event sequence. Ff this event stops no other event called.
 <br>Use `e.preventDefault()` to prevent sorting.
    */
   beforesorting: EventEmitter<CustomEvent<{ column: IRevoGridColumnRegular; order: 'desc' | 'asc'; additive: boolean; }>>;
   /**
-   * By `sorting.plugin.ts`
+   * By `SortingPlugin`
 <br>Same as `beforesorting` but triggered after `beforeanysource` (when source is changed).
 <br>Use `e.preventDefault()` to prevent sorting data change.
    */
   beforesourcesortingapply: EventEmitter<CustomEvent<{ type: IRevoGridDimensionRows; sorting?: IRevoGridSortingOrder; }>>;
   /**
-   * By `sorting.plugin.ts`
+   * By `SortingPlugin`
 <br> After `beforesorting`
 <br>Triggered after column data updated with new sorting order.
 <br>Use `e.preventDefault()` to prevent sorting data change.
@@ -165,7 +165,7 @@ Useful for performing actions or modifications before the final application of t
   /**
    * Column updated
    */
-  aftercolumnsset: EventEmitter<CustomEvent<{ columns: IRevoGridColumnCollection; order: Record<IRevoGridColumnProp, 'asc' | 'desc' | undefined>; }>>;
+  aftercolumnsset: EventEmitter<CustomEvent<{ columns: IRevoGridColumnCollection; order: IRevoGridSortingOrder; }>>;
   /**
    * Emitted before applying a filter to the data source.
 Use e.preventDefault() to prevent cell focus change.
@@ -222,6 +222,7 @@ Useful for modifying or preventing the default row definition behavior.
   filterconfigchanged: EventEmitter<CustomEvent<any>>;
   /**
    * Emitted when the sorting configuration is changed
+SortingPlugin subsribed to this event
    */
   sortingconfigchanged: EventEmitter<CustomEvent<IRevoGridSortingConfig>>;
   /**
