@@ -1,6 +1,6 @@
 {
   "name": "@revolist/angular-datagrid-project",
-  "version": "4.14.3",
+  "version": "4.14.4",
   "scripts": {
     "ng": "ng",
     "dev": "ng serve demo",
@@ -10,7 +10,7 @@
     "release": "npm run build && cd ./dist/angular-datagrid && npm publish --public --tag pre-release"
   },
   "dependencies": {
-    "@revolist/revogrid": "4.14.3",
+    "@revolist/revogrid": "4.14.4",
     "@stencil/core": "^4.19.2"
   },
   "devDependencies": {
