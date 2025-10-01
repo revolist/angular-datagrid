@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* auto-generated angular directive proxies */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, NgZone } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Output, NgZone } from '@angular/core';
 
-import { ProxyCmp, proxyOutputs } from './angular-component-lib/utils';
+import { ProxyCmp } from './angular-component-lib/utils';
 
 import type { Components } from '@revolist/revogrid/standalone';
 
@@ -18,14 +18,53 @@ import { defineCustomElement as defineRevoGrid } from '@revolist/revogrid/standa
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   inputs: ['accessible', 'additionalData', 'applyOnClose', 'autoSizeColumn', 'canDrag', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'rtl', 'sorting', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
-  standalone: true
+  outputs: ['contentsizechanged', 'beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforerange', 'afterfocus', 'roworderchanged', 'beforesorting', 'beforesourcesortingapply', 'beforesortingapply', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'beforeanysource', 'aftersourceset', 'afteranysource', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize', 'beforerowdefinition', 'filterconfigchanged', 'sortingconfigchanged', 'rowheaderschanged', 'beforegridrender', 'aftergridrender', 'aftergridinit', 'additionaldatachanged', 'afterthemechanged', 'created'],
 })
 export class RevoGrid {
-  protected el: HTMLElement;
+  protected el: HTMLRevoGridElement;
+  @Output() contentsizechanged = new EventEmitter<CustomEvent<IRevoGridMultiDimensionType>>();
+  @Output() beforeedit = new EventEmitter<CustomEvent<IRevoGridBeforeSaveDataDetails>>();
+  @Output() beforerangeedit = new EventEmitter<CustomEvent<IRevoGridBeforeRangeSaveDataDetails>>();
+  @Output() afteredit = new EventEmitter<CustomEvent<IRevoGridAfterEditEvent>>();
+  @Output() beforeautofill = new EventEmitter<CustomEvent<IRevoGridChangedRange>>();
+  @Output() beforerange = new EventEmitter<CustomEvent<IRevoGridChangedRange>>();
+  @Output() afterfocus = new EventEmitter<CustomEvent<IRevoGridFocusAfterRenderEvent>>();
+  @Output() roworderchanged = new EventEmitter<CustomEvent<{ from: number; to: number }>>();
+  @Output() beforesorting = new EventEmitter<CustomEvent<{ column: IRevoGridColumnRegular; order: 'desc' | 'asc'; additive: boolean; }>>();
+  @Output() beforesourcesortingapply = new EventEmitter<CustomEvent<{ type: IRevoGridDimensionRows; sorting?: IRevoGridSortingOrder; }>>();
+  @Output() beforesortingapply = new EventEmitter<CustomEvent<{ column: IRevoGridColumnRegular; order: 'desc' | 'asc'; additive: boolean; }>>();
+  @Output() rowdragstart = new EventEmitter<CustomEvent<IRevoGridRowDragStartDetails>>();
+  @Output() headerclick = new EventEmitter<CustomEvent<IRevoGridColumnRegular>>();
+  @Output() beforecellfocus = new EventEmitter<CustomEvent<IRevoGridBeforeSaveDataDetails>>();
+  @Output() beforefocuslost = new EventEmitter<CustomEvent<IRevoGridFocusedData | null>>();
+  @Output() beforesourceset = new EventEmitter<CustomEvent<{ type: IRevoGridDimensionRows; source: IRevoGridDataType[]; }>>();
+  @Output() beforeanysource = new EventEmitter<CustomEvent<{ type: IRevoGridDimensionRows; source: IRevoGridDataType[]; }>>();
+  @Output() aftersourceset = new EventEmitter<CustomEvent<{ type: IRevoGridDimensionRows; source: IRevoGridDataType[]; }>>();
+  @Output() afteranysource = new EventEmitter<CustomEvent<{ type: IRevoGridDimensionRows; source: IRevoGridDataType[]; }>>();
+  @Output() beforecolumnsset = new EventEmitter<CustomEvent<IRevoGridColumnCollection>>();
+  @Output() beforecolumnapplied = new EventEmitter<CustomEvent<IRevoGridColumnCollection>>();
+  @Output() aftercolumnsset = new EventEmitter<CustomEvent<{ columns: IRevoGridColumnCollection; order: IRevoGridSortingOrder; }>>();
+  @Output() beforefilterapply = new EventEmitter<CustomEvent<{ collection: Record<IRevoGridColumnProp, IRevoGridFilterCollectionItem> }>>();
+  @Output() beforefiltertrimmed = new EventEmitter<CustomEvent<{ collection: Record<IRevoGridColumnProp, IRevoGridFilterCollectionItem>; itemsToFilter: Record<number, boolean>; }>>();
+  @Output() beforetrimmed = new EventEmitter<CustomEvent<{ trimmed: Record<number, boolean>; trimmedType: string; type: string; }>>();
+  @Output() aftertrimmed = new EventEmitter<CustomEvent<any>>();
+  @Output() viewportscroll = new EventEmitter<CustomEvent<IRevoGridViewPortScrollEvent>>();
+  @Output() beforeexport = new EventEmitter<CustomEvent<IRevoGridDataInput>>();
+  @Output() beforeeditstart = new EventEmitter<CustomEvent<IRevoGridBeforeSaveDataDetails>>();
+  @Output() aftercolumnresize = new EventEmitter<CustomEvent<{ [index: number]: IRevoGridColumnRegular; }>>();
+  @Output() beforerowdefinition = new EventEmitter<CustomEvent<{ vals: any; oldVals: any }>>();
+  @Output() filterconfigchanged = new EventEmitter<CustomEvent<any>>();
+  @Output() sortingconfigchanged = new EventEmitter<CustomEvent<IRevoGridSortingConfig>>();
+  @Output() rowheaderschanged = new EventEmitter<CustomEvent<any>>();
+  @Output() beforegridrender = new EventEmitter<CustomEvent<any>>();
+  @Output() aftergridrender = new EventEmitter<CustomEvent<any>>();
+  @Output() aftergridinit = new EventEmitter<CustomEvent<any>>();
+  @Output() additionaldatachanged = new EventEmitter<CustomEvent<any>>();
+  @Output() afterthemechanged = new EventEmitter<CustomEvent<IRevoGridTheme>>();
+  @Output() created = new EventEmitter<CustomEvent<any>>();
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['contentsizechanged', 'beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforerange', 'afterfocus', 'roworderchanged', 'beforesorting', 'beforesourcesortingapply', 'beforesortingapply', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'beforeanysource', 'aftersourceset', 'afteranysource', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize', 'beforerowdefinition', 'filterconfigchanged', 'sortingconfigchanged', 'rowheaderschanged', 'beforegridrender', 'aftergridrender', 'aftergridinit', 'additionaldatachanged', 'afterthemechanged', 'created']);
   }
 }
 
