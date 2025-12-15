@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import {
   type ColumnRegular,
   Editor,
@@ -12,14 +13,24 @@ import { EditorComponent } from './editor.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RevoGrid],
-  template: `<revo-grid
-    style="height: 200px; width: 200px"
-    [filter]="true"
-    [columns]="columns"
-    [source]="source()"
-    [editors]="editors"
-  ></revo-grid>`,
+  imports: [RevoGrid, RouterOutlet],
+  template: `
+    <div style="display: flex; flex-direction: column; gap: 20px; padding: 20px;">
+      <h2>Direct RevoGrid Component</h2>
+      <revo-grid
+        key="app-root"
+        style="height: 200px; width: 200px"
+        [filter]="true"
+        [columns]="columns"
+        [source]="source()"
+        [editors]="editors"
+         theme="material"
+      ></revo-grid>
+      
+      <h2>RevoGrid Component via Router Outlet</h2>
+      <router-outlet></router-outlet>
+    </div>
+  `,
 })
 export class AppComponent {
   source = signal([
@@ -48,12 +59,14 @@ export class AppComponent {
         prop: 'name',
         name: 'First',
         editor: MY_EDITOR,
+        filter: true,
         columnTemplate: Template(CellComponent),
         cellTemplate: Template(CellComponent),
       },
       {
         prop: 'details',
         name: 'Second',
+        filter: true,
       },
     ];
     this.editors = { [MY_EDITOR]: Editor(EditorComponent) };
