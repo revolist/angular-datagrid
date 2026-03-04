@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   Template,
   Editor,
@@ -15,28 +15,28 @@ import { AppPlugin } from './app.plugin';
   standalone: true,
   imports: [RevoGrid],
   template: `<revo-grid
-    [source]="source"
+    [source]="source()"
     [columns]="columns"
     [editors]="editors"
     [plugins]="plugins"
   ></revo-grid>`,
 })
 export class AppComponent {
-  source: any[] = [
+  source = signal([
     {
-      name: '1',
-      details: 'Item 1',
+      name: 'Initial',
+      details: 'Initial Details',
     },
-  ];
+  ]);
   columns: ColumnRegular[] = [];
   editors: Editors = {};
   plugins = [AppPlugin];
 
   constructor() {
-    this.source = Array.from({ length: 100 }, (_, i) => ({
+    this.source.set(Array.from({ length: 100 }, (_, i) => ({
       name: (i + 1).toString(),
       details: `Item ${i + 1}`,
-    }));
+    })));
     const MY_EDITOR = 'custom-editor';
     this.columns = [
       {

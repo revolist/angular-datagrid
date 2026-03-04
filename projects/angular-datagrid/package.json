@@ -44,12 +44,12 @@
   "license": "MIT",
   "dependencies": {
     "@revolist/revogrid": "4.20.5",
-    "@stencil/core": "^4.19.2",
+    "@stencil/core": "^4.43.2",
     "tslib": "^2.6.3"
   },
   "devDependencies": {
-    "@angular/common": "^18.1.1",
-    "@angular/core": "^18.1.1"
+    "@angular/common": "^20.3.0",
+    "@angular/core": "^20.3.0"
   },
   "sideEffects": false,
   "publishConfig": {

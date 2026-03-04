@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@revolist/revogrid": "4.20.5",
-    "@stencil/core": "^4.36.3"
+    "@stencil/core": "^4.43.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^20.0.0",
