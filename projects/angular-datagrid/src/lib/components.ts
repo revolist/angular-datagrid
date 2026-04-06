@@ -9,7 +9,7 @@ import type { Components } from '@revolist/revogrid/standalone';
 import { defineCustomElements } from '@revolist/revogrid/loader';
 @ProxyCmp({
   defineCustomElementFn: defineCustomElements,
-  inputs: ['accessible', 'additionalData', 'applyOnClose', 'autoSizeColumn', 'canDrag', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'rtl', 'sorting', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
+  inputs: ['accessible', 'additionalData', 'applyOnClose', 'autoSizeColumn', 'canDrag', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'noHorizontalScrollTransfer', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'rtl', 'sorting', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
   methods: ['refresh', 'setDataAt', 'scrollToRow', 'scrollToColumnIndex', 'scrollToColumnProp', 'updateColumns', 'addTrimmed', 'scrollToCoordinate', 'setCellEdit', 'setCellsFocus', 'getSource', 'getVisibleSource', 'getSourceStore', 'getColumnStore', 'updateColumnSorting', 'clearSorting', 'getColumns', 'clearFocus', 'getPlugins', 'getFocused', 'getContentSize', 'getSelectedRange', 'refreshExtraElements', 'getProviders']
 })
 @Component({
@@ -17,8 +17,8 @@ import { defineCustomElements } from '@revolist/revogrid/loader';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['accessible', 'additionalData', 'applyOnClose', 'autoSizeColumn', 'canDrag', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'rtl', 'sorting', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
-  outputs: ['contentsizechanged', 'beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforerange', 'afterfocus', 'roworderchanged', 'beforesorting', 'beforesourcesortingapply', 'beforesortingapply', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'beforeanysource', 'aftersourceset', 'afteranysource', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize', 'beforerowdefinition', 'filterconfigchanged', 'sortingconfigchanged', 'rowheaderschanged', 'beforegridrender', 'aftergridrender', 'aftergridinit', 'additionaldatachanged', 'afterthemechanged', 'created'],
+  inputs: ['accessible', 'additionalData', 'applyOnClose', 'autoSizeColumn', 'canDrag', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'noHorizontalScrollTransfer', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'rtl', 'sorting', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
+  outputs: ['contentsizechanged', 'beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforerange', 'afterfocus', 'roworderchanged', 'beforesorting', 'beforesourcesortingapply', 'beforesortingapply', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'beforeanysource', 'aftersourceset', 'afteranysource', 'beforecolumnsgather', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize', 'beforerowdefinition', 'filterconfigchanged', 'sortingconfigchanged', 'rowheaderschanged', 'beforegridrender', 'aftergridrender', 'aftergridinit', 'additionaldatachanged', 'afterthemechanged', 'created'],
 })
 export class RevoGrid {
   protected el: HTMLRevoGridElement;
@@ -41,6 +41,7 @@ export class RevoGrid {
   @Output() beforeanysource = new EventEmitter<CustomEvent<{ type: IRevoGridDimensionRows; source: IRevoGridDataType[]; }>>();
   @Output() aftersourceset = new EventEmitter<CustomEvent<{ type: IRevoGridDimensionRows; source: IRevoGridDataType[]; }>>();
   @Output() afteranysource = new EventEmitter<CustomEvent<{ type: IRevoGridDimensionRows; source: IRevoGridDataType[]; }>>();
+  @Output() beforecolumnsgather = new EventEmitter<CustomEvent<{ columns: (IRevoGridColumnGrouping | IRevoGridColumnRegular)[]; }>>();
   @Output() beforecolumnsset = new EventEmitter<CustomEvent<IRevoGridColumnCollection>>();
   @Output() beforecolumnapplied = new EventEmitter<CustomEvent<IRevoGridColumnCollection>>();
   @Output() aftercolumnsset = new EventEmitter<CustomEvent<{ columns: IRevoGridColumnCollection; order: IRevoGridSortingOrder; }>>();
@@ -81,6 +82,7 @@ import type { SortingOrder as IRevoGridSortingOrder } from '@revolist/revogrid/s
 import type { RowDragStartDetails as IRevoGridRowDragStartDetails } from '@revolist/revogrid/standalone';
 import type { FocusedData as IRevoGridFocusedData } from '@revolist/revogrid/standalone';
 import type { DataType as IRevoGridDataType } from '@revolist/revogrid/standalone';
+import type { ColumnGrouping as IRevoGridColumnGrouping } from '@revolist/revogrid/standalone';
 import type { ColumnCollection as IRevoGridColumnCollection } from '@revolist/revogrid/standalone';
 import type { ColumnProp as IRevoGridColumnProp } from '@revolist/revogrid/standalone';
 import type { FilterCollectionItem as IRevoGridFilterCollectionItem } from '@revolist/revogrid/standalone';
@@ -191,6 +193,11 @@ You can override data source here
 Useful for tracking all changes originating from sources in both the pinned and main viewports.
    */
   afteranysource: EventEmitter<CustomEvent<{ type: IRevoGridDimensionRows; source: IRevoGridDataType[]; }>>;
+  /**
+   * Emitted before user column definitions are gathered into the internal column collection.
+Listeners can replace `detail.columns` to rewrite the raw column set before RevoGrid normalizes it.
+   */
+  beforecolumnsgather: EventEmitter<CustomEvent<{ columns: (IRevoGridColumnGrouping | IRevoGridColumnRegular)[]; }>>;
   /**
    * Emitted before a column update is applied.
 Listeners can use this event to perform any necessary actions or modifications before the column update is finalized.
