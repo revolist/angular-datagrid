@@ -18,7 +18,7 @@ import { defineCustomElements } from '@revolist/revogrid/loader';
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   inputs: ['accessible', 'additionalData', 'applyOnClose', 'autoSizeColumn', 'canDrag', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'noHorizontalScrollTransfer', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'rtl', 'sorting', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard'],
-  outputs: ['contentsizechanged', 'beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforerange', 'afterfocus', 'roworderchanged', 'beforesorting', 'beforesourcesortingapply', 'beforesortingapply', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'beforeanysource', 'aftersourceset', 'afteranysource', 'beforecolumnsgather', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize', 'beforerowdefinition', 'filterconfigchanged', 'sortingconfigchanged', 'rowheaderschanged', 'beforegridrender', 'aftergridrender', 'aftergridinit', 'additionaldatachanged', 'afterthemechanged', 'created'],
+  outputs: ['contentsizechanged', 'beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforerange', 'afterfocus', 'roworderchanged', 'beforesorting', 'beforesourcesortingapply', 'beforesortingapply', 'aftersortingapply', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'beforeanysource', 'aftersourceset', 'afteranysource', 'beforecolumnsgather', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize', 'beforerowdefinition', 'filterconfigchanged', 'sortingconfigchanged', 'rowheaderschanged', 'beforegridrender', 'aftergridrender', 'aftergridinit', 'additionaldatachanged', 'afterthemechanged', 'created'],
 })
 export class RevoGrid {
   protected el: HTMLRevoGridElement;
@@ -33,6 +33,7 @@ export class RevoGrid {
   @Output() beforesorting = new EventEmitter<CustomEvent<{ column: IRevoGridColumnRegular; order: 'desc' | 'asc'; additive: boolean; }>>();
   @Output() beforesourcesortingapply = new EventEmitter<CustomEvent<{ type: IRevoGridDimensionRows; sorting?: IRevoGridSortingOrder; }>>();
   @Output() beforesortingapply = new EventEmitter<CustomEvent<{ column: IRevoGridColumnRegular; order: 'desc' | 'asc'; additive: boolean; }>>();
+  @Output() aftersortingapply = new EventEmitter<CustomEvent<IRevoGridAfterSortingApplyEvent>>();
   @Output() rowdragstart = new EventEmitter<CustomEvent<IRevoGridRowDragStartDetails>>();
   @Output() headerclick = new EventEmitter<CustomEvent<IRevoGridColumnRegular>>();
   @Output() beforecellfocus = new EventEmitter<CustomEvent<IRevoGridBeforeSaveDataDetails>>();
@@ -79,6 +80,7 @@ import type { FocusAfterRenderEvent as IRevoGridFocusAfterRenderEvent } from '@r
 import type { ColumnRegular as IRevoGridColumnRegular } from '@revolist/revogrid/standalone';
 import type { DimensionRows as IRevoGridDimensionRows } from '@revolist/revogrid/standalone';
 import type { SortingOrder as IRevoGridSortingOrder } from '@revolist/revogrid/standalone';
+import type { AfterSortingApplyEvent as IRevoGridAfterSortingApplyEvent } from '@revolist/revogrid/standalone';
 import type { RowDragStartDetails as IRevoGridRowDragStartDetails } from '@revolist/revogrid/standalone';
 import type { FocusedData as IRevoGridFocusedData } from '@revolist/revogrid/standalone';
 import type { DataType as IRevoGridDataType } from '@revolist/revogrid/standalone';
@@ -154,6 +156,12 @@ To prevent the default behavior of changing the order of `rgRow`, you can call `
 <br>Use `e.preventDefault()` to prevent sorting data change.
    */
   beforesortingapply: EventEmitter<CustomEvent<{ column: IRevoGridColumnRegular; order: 'desc' | 'asc'; additive: boolean; }>>;
+  /**
+   * By `SortingPlugin`
+<br>Triggered after sorting has been applied and completed.
+<br>Provides final sorting state and sorting column metadata when available.
+   */
+  aftersortingapply: EventEmitter<CustomEvent<IRevoGridAfterSortingApplyEvent>>;
   /**
    * This event is triggered when the row order change is started.
 To prevent the default behavior of changing the row order, you can call `e.preventDefault()`.
