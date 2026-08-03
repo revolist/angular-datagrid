@@ -9,7 +9,7 @@ import type { Components } from '@revolist/revogrid/standalone';
 import { defineCustomElements } from '@revolist/revogrid/loader';
 @ProxyCmp({
   defineCustomElementFn: defineCustomElements,
-  inputs: ['accessible', 'additionalData', 'applyOnClose', 'autoSizeColumn', 'canDrag', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'noHorizontalScrollTransfer', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'rtl', 'sorting', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard', 'virtualX'],
+  inputs: ['accessible', 'additionalData', 'applyOnClose', 'autoSizeColumn', 'canDrag', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'noHorizontalScrollTransfer', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'rtl', 'sorting', 'source', 'stretch', 'theme', 'themeDefinitions', 'trimmedRows', 'useClipboard', 'virtualX'],
   methods: ['refresh', 'setDataAt', 'scrollToRow', 'scrollToColumnIndex', 'scrollToColumnProp', 'updateColumns', 'addTrimmed', 'scrollToCoordinate', 'setCellEdit', 'setCellsFocus', 'getSource', 'getVisibleSource', 'getSourceStore', 'getColumnStore', 'updateColumnSorting', 'clearSorting', 'getColumns', 'clearFocus', 'getPlugins', 'getFocused', 'getContentSize', 'getSelectedRange', 'refreshExtraElements', 'getProviders']
 })
 @Component({
@@ -17,7 +17,7 @@ import { defineCustomElements } from '@revolist/revogrid/loader';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['accessible', 'additionalData', 'applyOnClose', 'autoSizeColumn', 'canDrag', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'noHorizontalScrollTransfer', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'rtl', 'sorting', 'source', 'stretch', 'theme', 'trimmedRows', 'useClipboard', 'virtualX'],
+  inputs: ['accessible', 'additionalData', 'applyOnClose', 'autoSizeColumn', 'canDrag', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'noHorizontalScrollTransfer', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'rtl', 'sorting', 'source', 'stretch', 'theme', 'themeDefinitions', 'trimmedRows', 'useClipboard', 'virtualX'],
   outputs: ['contentsizechanged', 'beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforerange', 'afterfocus', 'roworderchanged', 'beforesorting', 'beforesourcesortingapply', 'beforesortingapply', 'aftersortingapply', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'beforeanysource', 'aftersourceset', 'afteranysource', 'beforecolumnsgather', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize', 'beforerowdefinition', 'filterconfigchanged', 'sortingconfigchanged', 'rowheaderschanged', 'beforegridrender', 'aftergridrender', 'aftergridinit', 'additionaldatachanged', 'afterthemechanged', 'created'],
 })
 export class RevoGrid {
@@ -62,7 +62,7 @@ export class RevoGrid {
   @Output() aftergridrender = new EventEmitter<CustomEvent<any>>();
   @Output() aftergridinit = new EventEmitter<CustomEvent<any>>();
   @Output() additionaldatachanged = new EventEmitter<CustomEvent<any>>();
-  @Output() afterthemechanged = new EventEmitter<CustomEvent<IRevoGridTheme>>();
+  @Output() afterthemechanged = new EventEmitter<CustomEvent<string>>();
   @Output() created = new EventEmitter<CustomEvent<any>>();
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
@@ -91,7 +91,6 @@ import type { FilterCollectionItem as IRevoGridFilterCollectionItem } from '@rev
 import type { ViewPortScrollEvent as IRevoGridViewPortScrollEvent } from '@revolist/revogrid/standalone';
 import type { DataInput as IRevoGridDataInput } from '@revolist/revogrid/standalone';
 import type { SortingConfig as IRevoGridSortingConfig } from '@revolist/revogrid/standalone';
-import type { Theme as IRevoGridTheme } from '@revolist/revogrid/standalone';
 
 export declare interface RevoGrid extends Components.RevoGrid {
   /**
@@ -302,7 +301,7 @@ SortingPlugin subsribed to this event
   /**
    * Emmited after the theme is changed
    */
-  afterthemechanged: EventEmitter<CustomEvent<IRevoGridTheme>>;
+  afterthemechanged: EventEmitter<CustomEvent<string>>;
   /**
    * Emmited after grid created
    */
