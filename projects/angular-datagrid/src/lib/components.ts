@@ -18,7 +18,7 @@ import { defineCustomElements } from '@revolist/revogrid/loader';
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   inputs: ['accessible', 'additionalData', 'applyOnClose', 'autoSizeColumn', 'canDrag', 'canFocus', 'canMoveColumns', 'colSize', 'columnTypes', 'columns', 'disableVirtualX', 'disableVirtualY', 'editors', 'exporting', 'filter', 'focusTemplate', 'frameSize', 'grouping', 'hideAttribution', 'jobsBeforeRender', 'noHorizontalScrollTransfer', 'pinnedBottomSource', 'pinnedTopSource', 'plugins', 'range', 'readonly', 'registerVNode', 'resize', 'resizeRow', 'rowClass', 'rowDefinitions', 'rowHeaders', 'rowSize', 'rtl', 'sorting', 'source', 'stretch', 'theme', 'themeDefinitions', 'trimmedRows', 'useClipboard', 'virtualX'],
-  outputs: ['contentsizechanged', 'beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforerange', 'afterfocus', 'roworderchanged', 'beforesorting', 'beforesourcesortingapply', 'beforesortingapply', 'aftersortingapply', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'beforeanysource', 'aftersourceset', 'afteranysource', 'beforecolumnsgather', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize', 'beforerowdefinition', 'filterconfigchanged', 'sortingconfigchanged', 'rowheaderschanged', 'beforegridrender', 'aftergridrender', 'aftergridinit', 'additionaldatachanged', 'afterthemechanged', 'created'],
+  outputs: ['contentsizechanged', 'beforeedit', 'beforerangeedit', 'afteredit', 'beforeautofill', 'beforerange', 'afterfocus', 'roworderchanged', 'beforesorting', 'beforesourcesortingapply', 'beforesortingapply', 'aftersortingapply', 'rowdragstart', 'headerclick', 'beforecellfocus', 'beforefocuslost', 'beforesourceset', 'beforeanysource', 'aftersourceset', 'afteranysource', 'beforecolumnsgather', 'beforecolumnsset', 'beforecolumnapplied', 'aftercolumnsset', 'beforefilterapply', 'beforefiltertrimmed', 'afterfilterapply', 'beforetrimmed', 'aftertrimmed', 'viewportscroll', 'beforeexport', 'beforeeditstart', 'aftercolumnresize', 'beforerowdefinition', 'filterconfigchanged', 'sortingconfigchanged', 'rowheaderschanged', 'beforegridrender', 'aftergridrender', 'aftergridinit', 'additionaldatachanged', 'afterthemechanged', 'created'],
 })
 export class RevoGrid {
   protected el: HTMLRevoGridElement;
@@ -46,8 +46,9 @@ export class RevoGrid {
   @Output() beforecolumnsset = new EventEmitter<CustomEvent<IRevoGridColumnCollection>>();
   @Output() beforecolumnapplied = new EventEmitter<CustomEvent<IRevoGridColumnCollection>>();
   @Output() aftercolumnsset = new EventEmitter<CustomEvent<{ columns: IRevoGridColumnCollection; order: IRevoGridSortingOrder; }>>();
-  @Output() beforefilterapply = new EventEmitter<CustomEvent<{ collection: Record<IRevoGridColumnProp, IRevoGridFilterCollectionItem> }>>();
-  @Output() beforefiltertrimmed = new EventEmitter<CustomEvent<{ collection: Record<IRevoGridColumnProp, IRevoGridFilterCollectionItem>; itemsToFilter: Record<number, boolean>; }>>();
+  @Output() beforefilterapply = new EventEmitter<CustomEvent<IRevoGridBeforeFilterApplyEventProps>>();
+  @Output() beforefiltertrimmed = new EventEmitter<CustomEvent<IRevoGridBeforeFilterTrimmedEventProps>>();
+  @Output() afterfilterapply = new EventEmitter<CustomEvent<IRevoGridAfterFilterApplyEventProps>>();
   @Output() beforetrimmed = new EventEmitter<CustomEvent<{ trimmed: Record<number, boolean>; trimmedType: string; type: string; }>>();
   @Output() aftertrimmed = new EventEmitter<CustomEvent<any>>();
   @Output() viewportscroll = new EventEmitter<CustomEvent<IRevoGridViewPortScrollEvent>>();
@@ -86,8 +87,9 @@ import type { FocusedData as IRevoGridFocusedData } from '@revolist/revogrid/sta
 import type { DataType as IRevoGridDataType } from '@revolist/revogrid/standalone';
 import type { ColumnGrouping as IRevoGridColumnGrouping } from '@revolist/revogrid/standalone';
 import type { ColumnCollection as IRevoGridColumnCollection } from '@revolist/revogrid/standalone';
-import type { ColumnProp as IRevoGridColumnProp } from '@revolist/revogrid/standalone';
-import type { FilterCollectionItem as IRevoGridFilterCollectionItem } from '@revolist/revogrid/standalone';
+import type { BeforeFilterApplyEventProps as IRevoGridBeforeFilterApplyEventProps } from '@revolist/revogrid/standalone';
+import type { BeforeFilterTrimmedEventProps as IRevoGridBeforeFilterTrimmedEventProps } from '@revolist/revogrid/standalone';
+import type { AfterFilterApplyEventProps as IRevoGridAfterFilterApplyEventProps } from '@revolist/revogrid/standalone';
 import type { ViewPortScrollEvent as IRevoGridViewPortScrollEvent } from '@revolist/revogrid/standalone';
 import type { DataInput as IRevoGridDataInput } from '@revolist/revogrid/standalone';
 import type { SortingConfig as IRevoGridSortingConfig } from '@revolist/revogrid/standalone';
@@ -221,17 +223,23 @@ Useful for performing actions or modifications before the final application of t
   aftercolumnsset: EventEmitter<CustomEvent<{ columns: IRevoGridColumnCollection; order: IRevoGridSortingOrder; }>>;
   /**
    * Emitted before applying a filter to the data source.
-Use e.preventDefault() to prevent cell focus change.
-Modify if you need to change filters.
+Use `event.preventDefault()` to handle filtering outside Core. `collection`
+contains the first condition for each column; `filterItems` contains the
+complete multi-condition model.
    */
-  beforefilterapply: EventEmitter<CustomEvent<{ collection: Record<IRevoGridColumnProp, IRevoGridFilterCollectionItem> }>>;
+  beforefilterapply: EventEmitter<CustomEvent<IRevoGridBeforeFilterApplyEventProps>>;
   /**
-   * Emitted before applying a filter to the data source.
-Use e.preventDefault() to prevent the default behavior of trimming values and applying the filter.
-Modify the `collection` property if you want to change the filters.
-Modify the `itemsToFilter` property if you want to filter the indexes for trimming.
+   * Emitted before applying filter trim indexes. Use `event.preventDefault()`
+to cancel. `collection` contains the first condition for each column;
+`filterItems` contains the complete model.
    */
-  beforefiltertrimmed: EventEmitter<CustomEvent<{ collection: Record<IRevoGridColumnProp, IRevoGridFilterCollectionItem>; itemsToFilter: Record<number, boolean>; }>>;
+  beforefiltertrimmed: EventEmitter<CustomEvent<IRevoGridBeforeFilterTrimmedEventProps>>;
+  /**
+   * Emitted after the filter trim has been applied. `collection` contains the
+first condition for each column; `filterItems` contains the complete model,
+and `multiFilterItems` is an alias for `filterItems`.
+   */
+  afterfilterapply: EventEmitter<CustomEvent<IRevoGridAfterFilterApplyEventProps>>;
   /**
    * Emitted before trimming values.
 Use e.preventDefault() to prevent the default behavior of trimming values.
