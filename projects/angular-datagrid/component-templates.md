@@ -1,28 +1,22 @@
-# Component content templates
+# Framework content templates
 
-Call `useTemplates()` in a component's injection context (for example a
-field initializer). It captures that component's Injector and DestroyRef, so
-local providers are inherited and embedded views are destroyed with the owner.
-No separate outlet is required.
+`useTemplates()` is a thin wrapper around the existing framework `Template` factory. It returns ordinary template callbacks for cells, master rows, Kanban cards, and Gantt labels. There is no outlet or separate mounting protocol.
 
 ```ts
 import { useTemplates } from '@revolist/angular-datagrid';
+import type { CellTemplateProp } from '@revolist/revogrid';
 
-readonly templates = useTemplates();
-readonly cardContent = this.templates.template<MyCardContext>(MyCardComponent);
+const templates = useTemplates();
+const content = templates.template<CellTemplateProp>(MyCell, {
+  props: context => ({ item: context.model }),
+  key: context => context.model.id,
+});
 ```
 
-The component declares a `context` input. To reuse other inputs, pass
-`{ props: context => ({ item: context.card }) }`. Input updates use `setInput` and
-normal Angular change detection; removed mapped inputs receive `undefined`.
-OnPush and input lifecycle hooks remain supported. `dispose()` destroys all
-owned views. Offscreen content unmounts; durable state belongs to app data.
+Without `props`, the component receives a `context` prop/input. The optional `key` selects record identity when hosts are reused. Supply a stable key for cells whose records may reorder. Mapped inputs are recomputed when the product invokes the callback. To clear an input, explicitly pass `undefined`.
 
-Use Core `asCellTemplate(definition, { key: p => p.model.id })` for cells,
-`masterRow.template` for master details, `customization.cardContent` for Kanban,
-and `gantt.visuals.taskBarContent` for Gantt labels. Product controls and default
-export behavior remain in the owning product.
+Use the returned callback directly as `column.cellTemplate`, `masterRow.template`, `customization.cardContent`, or `gantt.visuals.taskBarContent`. Product progress, resize, dependency, selection and drag controls remain outside the custom content. The legacy Gantt content hook takes precedence. Exports retain the default product representation.
 
-Existing `Template`, `TemplateConstructor` and editor APIs remain compatible and
-share the low-level component creation primitive. These new helpers require the
-new Core exports; release Core before publishing consuming integrations.
+Call useTemplates in an injection context. It captures the injector and delegates to the existing TemplateConstructor. Components declare mapped Angular inputs; normal setInput and change detection are used.
+
+Templates use the existing renderer’s ref cleanup and product caching behavior; `useTemplates` adds no lifecycle management. Existing `Template` and editor signatures remain available; their default cell prop shape is unchanged.

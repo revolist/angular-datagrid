@@ -15,12 +15,18 @@ export interface RenderedComponent<T> {
   destroy: () => void;               // Function to destroy the component
 }
 
-function updateProps<T extends object>(el: AngularElement, newProps: T) {
+function updateProps<T extends object>(el: AngularElement, newProps: T, directInputs = false) {
   if (!el.componentRef?.instance) {
     return;
   }
   
   
+  if (directInputs) {
+    for (const [key, value] of Object.entries(newProps)) el.componentRef.setInput(key, value);
+    el.componentRef.changeDetectorRef.detectChanges();
+    return;
+  }
+
   // Update both ways to ensure it works with different component implementations
   el.componentRef.instance.props = newProps;
   el.componentRef.setInput('props', newProps);
@@ -50,6 +56,7 @@ export function TemplateConstructor<T extends Object>(
   initialProps: T = {} as T,
   injector: Injector,
   lastEl: RenderedComponent<T> | null = null,
+  directInputs = false,
 ): RenderedComponent<T> | null {
   if (!el) {
     lastEl?.destroy?.();  // Destroy last component if element is null
@@ -58,16 +65,19 @@ export function TemplateConstructor<T extends Object>(
 
   if (!el.componentRef) {
     const componentRef = mountAngularComponent(AngularComponent, injector);
-    componentRef.instance.props = initialProps;
-    componentRef.changeDetectorRef.detectChanges();
     el.componentRef = componentRef;  // Store the component reference
+    if (directInputs) updateProps(el, initialProps, true);
+    else {
+      componentRef.instance.props = initialProps;
+      componentRef.changeDetectorRef.detectChanges();
+    }
     el.appendChild(componentRef.location.nativeElement);
   } else if (el.componentRef.instance) {
-    updateProps(el, initialProps);
+    updateProps(el, initialProps, directInputs);
   }
 
   // Function to update component props
-  const update = (newProps: T) => updateProps(el, newProps);
+  const update = (newProps: T) => updateProps(el, newProps, directInputs);
 
   // Function to destroy the component
   const destroy = () => {
@@ -78,21 +88,16 @@ export function TemplateConstructor<T extends Object>(
   return { update, destroy };
 }
 
-// Function to create template for Angular component
-export const Template = (
-  AngularComponent: Type<any>,
-  customProps?: any,
-  injector = inject(Injector)
-) => {
-  return (h: any, p: ColumnDataSchemaModel | ColumnTemplateProp, addition?: any) => {
-    const props = customProps ? { ...customProps, ...p } : p;
-    props.addition = addition;
-    let lastEl: RenderedComponent<any> | null = null;
-    return h('span', {
-      key: `${p.prop}-${p.rowIndex || 0}`,
-      ref: (el: AngularElement | null) => {
-        lastEl = TemplateConstructor(el, AngularComponent, props, injector, lastEl);
-      }
-    });
-  };
+export const Template = <C = ColumnDataSchemaModel | ColumnTemplateProp>(
+  AngularComponent: Type<any>, customProps?: any,
+  injector = inject(Injector), options?: { props?: (context: C) => Record<string, any>; key?: (context: C) => string | number },
+) => (h: any, p: C, addition?: any) => {
+  const props = options?.props ? options.props(p) : { ...customProps, ...p, addition };
+  let lastEl: RenderedComponent<any> | null = null;
+  return h('span', {
+    key: options?.key?.(p) ?? `${(p as any).prop}-${(p as any).rowIndex || 0}`,
+    ref: (el: AngularElement | null) => {
+      lastEl = TemplateConstructor(el, AngularComponent, props, injector, lastEl, !!options?.props);
+    },
+  });
 };
