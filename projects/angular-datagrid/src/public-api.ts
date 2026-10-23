@@ -6,3 +6,5 @@ export * from './lib/components';
 export * from './lib/editor.adapter';
 export * from './lib/editor';
 export * from './lib/renderer';
+
+export * from './lib/component-template';

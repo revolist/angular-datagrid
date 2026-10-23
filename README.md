@@ -531,3 +531,8 @@ MIT
 
 ---
 
+
+### Component content templates
+
+See [component templates](./projects/angular-datagrid/component-templates.md) for framework components in
+cells, master details, Kanban cards and Gantt labels. Existing template APIs remain supported.

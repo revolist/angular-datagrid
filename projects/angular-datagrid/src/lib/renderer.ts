@@ -2,7 +2,8 @@
  * Angular Adapter Function:
  * Handles the rendering and lifecycle of Angular components within StencilJS using updated Angular APIs.
  */
-import { Injector, ComponentRef, Type, ApplicationRef, createComponent, EnvironmentInjector, inject } from '@angular/core';
+import { Injector, ComponentRef, Type, inject } from '@angular/core';
+import { mountAngularComponent } from './component-mount';
 import { ColumnDataSchemaModel, ColumnTemplateProp } from '@revolist/revogrid';
 
 export interface AngularElement extends HTMLElement {
@@ -56,10 +57,7 @@ export function TemplateConstructor<T extends Object>(
   }
 
   if (!el.componentRef) {
-    const applicationRef = injector.get(ApplicationRef);
-    const environmentInjector = injector.get(EnvironmentInjector);
-    const componentRef = createComponent(AngularComponent, { environmentInjector });
-    applicationRef.attachView(componentRef.hostView);
+    const componentRef = mountAngularComponent(AngularComponent, injector);
     componentRef.instance.props = initialProps;
     componentRef.changeDetectorRef.detectChanges();
     el.componentRef = componentRef;  // Store the component reference
